@@ -1,11 +1,13 @@
+set nocompatible
+
+" GVim required the runtime path to contain the startup script folder
+let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
+let &runtimepath.=','.escape(expand('<sfile>:p:h/colors'), '\,')
+
 execute pathogen#infect()
 
-syntax on
+" syntax on
 filetype plugin indent on
-
-let mapleader = ","
-
-set nocompatible
 
 " My prefered escape
 :inoremap jk <esc>
@@ -24,6 +26,9 @@ nnoremap k gk
 
 " Save when focus is lost
 au FocusLost * :wa
+
+" ** Leader keys **
+let mapleader = ","
 
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -44,7 +49,7 @@ nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <leader><space> :noh<cr>
 
 set list
-set listchars=tab:▸\ ,eol:¬,space:.
+set listchars=tab:>-,eol:\ ,space:.,nbsp:~,extends:$
 set modelines=0
 set tabstop=4
 set shiftwidth=4
@@ -58,14 +63,15 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-set visualbell
 set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-set laststatus=2
+
+" Breaks VC - adds an extra white box in vsvim
+" set laststatus=2
+
 set relativenumber
-set undofile
 set ignorecase
 set smartcase
 set gdefault
@@ -77,8 +83,10 @@ set hlsearch
 nnoremap / /\v
 vnoremap / /\v
 
+" Dark goodness
 :colorscheme molokai
 
+" File tree, Tagbar tree
 :map <C-n> :NERDTreeToggle<CR>
 :map <C-t> :TagbarToggle<CR>
 
@@ -102,9 +110,9 @@ nnoremap <C-l> <C-w>l
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+set guifont=Consolas:h11
