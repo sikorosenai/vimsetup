@@ -6,7 +6,7 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h/colors'), '\,')
 
 execute pathogen#infect()
 
-" syntax on
+syntax on
 filetype plugin indent on
 
 " My prefered escape
@@ -83,8 +83,6 @@ set hlsearch
 nnoremap / /\v
 vnoremap / /\v
 
-" Dark goodness
-:colorscheme molokai
 
 " File tree, Tagbar tree
 :map <C-n> :NERDTreeToggle<CR>
@@ -112,7 +110,12 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 set guifont=Consolas:h11
+
+" Dark goodness
+set background=dark
+colorscheme molokai
+
