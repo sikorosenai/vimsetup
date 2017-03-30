@@ -48,6 +48,10 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Remove highlight selection
 nnoremap <leader><space> :noh<cr>
 
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
 set list
 set listchars=tab:>-,eol:\ ,space:.,nbsp:~,extends:$
 set modelines=0
@@ -82,7 +86,6 @@ set hlsearch
 " Always use regex
 nnoremap / /\v
 vnoremap / /\v
-
 
 " File tree, Tagbar tree
 :map <C-n> :NERDTreeToggle<CR>
