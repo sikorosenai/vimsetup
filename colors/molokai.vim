@@ -149,7 +149,7 @@ hi VisualNOS  guibg=#403D3D
 hi Visual     guibg=#403D3D
 " }}}
 " Invisible character colors {{{
-highlight NonText    guifg=#111111 guibg=bg
+highlight NonText    guifg=#444444 guibg=bg
 highlight SpecialKey guifg=#444444 guibg=bg
 " }}}
 
