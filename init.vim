@@ -2,8 +2,9 @@ set nocompatible
 
 " GVim required the runtime path to contain the startup script folder
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
-let &runtimepath.=','.escape(expand('<sfile>:p:h/colors'), '\,')
-
+let &runtimepath.=','.escape(expand('<sfile>:p:h').'/colors', '\,')
+let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle/Vundle.vim', '\,')
+let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle', '\,')
 filetype off
 call vundle#begin()
 
@@ -12,15 +13,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'valloric/youcompleteme'
 Plugin 'easymotion/vim-easymotion'
-
-
-
+Plugin 'derekwyatt/vim-fswitch'
 
 call vundle#end()
 filetype plugin indent on
@@ -104,6 +103,9 @@ set hlsearch
 " Always use regex
 nnoremap / /\v
 vnoremap / /\v
+
+" Swap files
+:map <C-k><C-o> :FSHere<CR>
 
 " File tree, Tagbar tree
 :map <C-n> :NERDTreeToggle<CR>
