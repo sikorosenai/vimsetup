@@ -4,10 +4,28 @@ set nocompatible
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 let &runtimepath.=','.escape(expand('<sfile>:p:h/colors'), '\,')
 
-execute pathogen#infect()
+filetype off
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'kien/ctrlp'
+Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'valloric/youcompleteme'
+Plugin 'easymotion/vim-easymotion'
+
+
+
+
+call vundle#end()
+filetype plugin indent on
 
 syntax on
-filetype plugin indent on
 
 " My prefered escape
 :inoremap jk <esc>
