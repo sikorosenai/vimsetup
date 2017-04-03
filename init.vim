@@ -20,6 +20,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'valloric/youcompleteme'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'derekwyatt/vim-fswitch'
+Plugin 'mtth/scratch.vim' 
 
 call vundle#end()
 filetype plugin indent on
@@ -30,16 +31,10 @@ syntax on
 :inoremap jk <esc>
 
 " Force no use of arrows
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
+nnoremap gk k
+nnoremap gj j
 
 " Save when focus is lost
 au FocusLost * :wa
@@ -110,6 +105,7 @@ vnoremap / /\v
 " File tree, Tagbar tree
 :map <C-n> :NERDTreeToggle<CR>
 :map <C-t> :TagbarToggle<CR>
+:map <C-p> :CtrlPMixed<CR>
 
 " Use system clipboard
 :set clipboard=unnamed
