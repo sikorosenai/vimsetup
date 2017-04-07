@@ -21,6 +21,7 @@ Plugin 'valloric/youcompleteme'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'mtth/scratch.vim' 
+Plugin 'fholgado/minibufexpl.vim'
 
 call vundle#end()
 filetype plugin indent on
