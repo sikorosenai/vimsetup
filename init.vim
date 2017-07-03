@@ -19,9 +19,13 @@ Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'valloric/youcompleteme'
 Plugin 'easymotion/vim-easymotion'
+" Plugin 'timburgess/extempore.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'mtth/scratch.vim' 
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'tpope/vim-fireplace'
+Plugin 'guns/vim-sexp'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
 call vundle#end()
 filetype plugin indent on
@@ -61,6 +65,10 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Remove highlight selection
 nnoremap <leader><space> :noh<cr>
 
+" Replace with last yanked
+nnoremap <leader>s diw"0P
+
+
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -86,7 +94,7 @@ set ruler
 set backspace=indent,eol,start
 
 " Breaks VC - adds an extra white box in vsvim
-" set laststatus=2
+set laststatus=2
 
 set relativenumber
 set ignorecase
@@ -123,6 +131,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+nnoremap <C-i> :CtrlPTag<CR>
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -131,6 +141,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" Minibuf explorer
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
 
 set guifont=Consolas:h11
 
