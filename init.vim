@@ -22,7 +22,7 @@ Plugin 'easymotion/vim-easymotion'
 " Plugin 'timburgess/extempore.vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'mtth/scratch.vim' 
-Plugin 'fholgado/minibufexpl.vim'
+" Plugin 'fholgado/minibufexpl.vim'
 Plugin 'tpope/vim-fireplace'
 Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
@@ -114,6 +114,7 @@ vnoremap / /\v
 :map <C-n> :NERDTreeToggle<CR>
 :map <C-t> :TagbarToggle<CR>
 :map <C-p> :CtrlPMixed<CR>
+nnoremap <C-i> :CtrlPTag<CR>
 
 " Use system clipboard
 :set clipboard=unnamed
@@ -130,8 +131,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-nnoremap <C-i> :CtrlPTag<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
