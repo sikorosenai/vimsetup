@@ -153,3 +153,4 @@ set guifont=Consolas:h11
 set background=dark
 colorscheme molokai
 
+autocmd GUIEnter * simalt ~x
