@@ -8,34 +8,36 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle', '\,')
 filetype off
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'bling/vim-airline'
-Plugin 'majutsushi/tagbar'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'valloric/youcompleteme'
-Plugin 'easymotion/vim-easymotion'
+Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
+Plugin 'tpope/vim-fugitive'            " Git support
+Plugin 'scrooloose/nerdtree'           " Tree browser
+Plugin 'scrooloose/nerdcommenter'      " Comment code sections
+Plugin 'tpope/vim-surround'            " Surround section with ', etc.
+Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
+Plugin 'bling/vim-airline'             " Fancy status bar
+Plugin 'majutsushi/tagbar'             " Side tag bar for ctags
+Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
+Plugin 'valloric/youcompleteme'        " Code completion
+Plugin 'easymotion/vim-easymotion'     " easy jumping around
 " Plugin 'timburgess/extempore.vim'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'mtth/scratch.vim' 
+Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
+Plugin 'mtth/scratch.vim'              " gs scratch window
 " Plugin 'fholgado/minibufexpl.vim'
-Plugin 'tpope/vim-fireplace'
-Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plugin 'tpope/vim-fireplace'           " clojure list repl
+Plugin 'guns/vim-sexp'                 " manage lisp sexp
+Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on
 
 syntax on
 
-" My prefered escape
+" My prefered escape character (j then k)
 :inoremap jk <esc>
 
-" Force no use of arrows
+" Force no use of arrows in normal mode
 nnoremap j gj
 nnoremap k gk
 nnoremap gk k
@@ -44,14 +46,11 @@ nnoremap gj j
 " Save when focus is lost
 au FocusLost * :wa
 
-" ** Leader keys **
+" ** Leader keys Comma is easier to reach
 let mapleader = ","
 
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-" Todo - fix ripgrep
-nnoremap <leader>a :rg
 
 " Reselect text that was just pasted
 nnoremap <leader>v V`]
@@ -67,7 +66,6 @@ nnoremap <leader><space> :noh<cr>
 
 " Replace with last yanked
 nnoremap <leader>s diw"0P
-
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -107,8 +105,11 @@ set hlsearch
 nnoremap / /\v
 vnoremap / /\v
 
-" Swap files
+" Swap files between source header
 :map <C-k><C-o> :FSHere<CR>
+:map <C-k><C-o> :FSHere<CR>
+:map <C-k><C-w> :FSRight<CR>
+:map <C-k><C-W> :FSLeft<CR>
 
 " File tree, Tagbar tree
 :map <C-n> :NERDTreeToggle<CR>
@@ -136,6 +137,7 @@ nnoremap <C-l> <C-w>l
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%{fugitive#statusline()}
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -157,3 +159,16 @@ set background=dark
 colorscheme molokai
 
 autocmd GUIEnter * simalt ~x
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --no-ignore --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
