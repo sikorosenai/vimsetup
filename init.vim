@@ -147,6 +147,9 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
+autocmd FileType c,cpp setlocal equalprg=clang-format
+nnoremap <C-k> <C-d> G=gg
+
 set guifont=Consolas:h11
 
 " Dark goodness
