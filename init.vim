@@ -28,6 +28,8 @@ Plugin 'guns/vim-sexp'                 " manage lisp sexp
 Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'ntpeters/vim-airline-colornum'
+"Plugin 'craigemery/vim-autotag'        " Doesn't work?
 
 call vundle#end()
 filetype plugin indent on
@@ -86,7 +88,9 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-set cursorline
+
+" Breaks vis white space
+set nocursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
@@ -150,7 +154,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 autocmd FileType c,cpp setlocal equalprg=clang-format
-nnoremap <C-k> <C-d> G=gg
+nnoremap <C-k><C-d> gg=G''
 
 set guifont=Consolas:h11
 
