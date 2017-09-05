@@ -17,18 +17,18 @@ Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
 Plugin 'bling/vim-airline'             " Fancy status bar
 Plugin 'majutsushi/tagbar'             " Side tag bar for ctags
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-Plugin 'valloric/youcompleteme'        " Code completion
+"Plugin 'valloric/youcompleteme'        " Code completion
 Plugin 'easymotion/vim-easymotion'     " easy jumping around
 " Plugin 'timburgess/extempore.vim'
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
 " Plugin 'fholgado/minibufexpl.vim'
-Plugin 'tpope/vim-fireplace'           " clojure list repl
-Plugin 'guns/vim-sexp'                 " manage lisp sexp
-Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'ntpeters/vim-airline-colornum'
+" Plugin 'tpope/vim-fireplace'           " clojure list repl
+"Plugin 'guns/vim-sexp'                 " manage lisp sexp
+"Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
+"Plugin 'junegunn/fzf'
+"Plugin 'junegunn/fzf.vim'
+"Plugin 'ntpeters/vim-airline-colornum'
 "Plugin 'craigemery/vim-autotag'        " Doesn't work?
 
 call vundle#end()
@@ -54,6 +54,9 @@ let mapleader = ","
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
+nnoremap <Leader>gt g<C-]>
+nnoremap <Leader>t <C-]>
+
 " Reselect text that was just pasted
 nnoremap <leader>v V`]
 
@@ -68,6 +71,8 @@ nnoremap <leader><space> :noh<cr>
 
 " Replace with last yanked
 nnoremap <leader>s diw"0P
+
+command! MakeTags !ctags -R .
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar

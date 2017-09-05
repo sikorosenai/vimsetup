@@ -149,8 +149,8 @@ hi VisualNOS  guibg=#403D3D
 hi Visual     guibg=#403D3D
 " }}}
 " Invisible character colors {{{
-highlight NonText    guifg=#444444 guibg=bg
-highlight SpecialKey guifg=#444444 guibg=bg
+highlight NonText    guifg=#223322 guibg=bg
+highlight SpecialKey guifg=#223322 guibg=bg
 " }}}
 
 " Support for 256-color terminals {{{
