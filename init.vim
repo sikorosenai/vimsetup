@@ -13,6 +13,7 @@ Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
 Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 Plugin 'tpope/vim-surround'            " Surround section with ', etc.
+Plugin 'tpope/vim-unimpaired'
 Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
 Plugin 'bling/vim-airline'             " Fancy status bar
 Plugin 'majutsushi/tagbar'             " Side tag bar for ctags
@@ -29,6 +30,8 @@ Plugin 'mtth/scratch.vim'              " gs scratch window
 "Plugin 'junegunn/fzf'
 "Plugin 'junegunn/fzf.vim'
 "Plugin 'ntpeters/vim-airline-colornum'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 "Plugin 'craigemery/vim-autotag'        " Doesn't work?
 
 call vundle#end()
@@ -54,6 +57,7 @@ let mapleader = ","
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
+" Tag list and tag jump
 nnoremap <Leader>gt g<C-]>
 nnoremap <Leader>t <C-]>
 
