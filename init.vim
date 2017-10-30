@@ -16,7 +16,7 @@ Plugin 'tpope/vim-surround'            " Surround section with ', etc.
 Plugin 'tpope/vim-unimpaired'
 Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
 Plugin 'bling/vim-airline'             " Fancy status bar
-Plugin 'majutsushi/tagbar'             " Side tag bar for ctags
+" Plugin 'majutsushi/tagbar'             " Side tag bar for ctags
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
 "Plugin 'valloric/youcompleteme'        " Code completion
 Plugin 'easymotion/vim-easymotion'     " easy jumping around
@@ -24,7 +24,10 @@ Plugin 'easymotion/vim-easymotion'     " easy jumping around
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
 " Plugin 'fholgado/minibufexpl.vim'
-" Plugin 'tpope/vim-fireplace'           " clojure list repl
+Plugin 'tpope/vim-fireplace'           " clojure list repl
+Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-clojure-highlight'
+Plugin 'kien/rainbow_parentheses.vim'
 "Plugin 'guns/vim-sexp'                 " manage lisp sexp
 "Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
 "Plugin 'junegunn/fzf'
@@ -50,6 +53,10 @@ nnoremap gj j
 
 " Save when focus is lost
 au FocusLost * :wa
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " ** Leader keys Comma is easier to reach
 let mapleader = ","
@@ -125,8 +132,8 @@ vnoremap / /\v
 :map <C-k><C-W> :FSLeft<CR>
 
 " File tree, Tagbar tree
-:map <C-n> :NERDTreeToggle<CR>
-:map <C-t> :TagbarToggle<CR>
+:map <C-T> :NERDTreeToggle<CR>
+":map <C-T> :TagbarToggle<CR>
 :map <C-p> :CtrlPMixed<CR>
 nnoremap <C-i> :CtrlPTag<CR>
 
