@@ -53,10 +53,14 @@ nnoremap gj j
 
 " Save when focus is lost
 au FocusLost * :wa
+
+try
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+catch
+endtry
 
 " ** Leader keys Comma is easier to reach
 let mapleader = ","

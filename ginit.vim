@@ -1,0 +1,1 @@
+call GuiWindowMaximized(1)
