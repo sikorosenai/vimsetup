@@ -8,37 +8,36 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle', '\,')
 filetype off
 call vundle#begin()
 
-let g:python3_host_prog='$MYPYTHON3'
-let g:python_host_prog='$MYPYTHON2'
+let g:python3_host_prog=$MYPYTHON3
+let g:python_host_prog=$MYPYTHON2
 
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
 Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
 Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 Plugin 'tpope/vim-surround'            " Surround section with ', etc.
-Plugin 'tpope/vim-unimpaired'
-Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
+Plugin 'tpope/vim-unimpaired'          " Useful selectors
 Plugin 'bling/vim-airline'             " Fancy status bar
-" Plugin 'majutsushi/tagbar'             " Side tag bar for ctags
+
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-"Plugin 'valloric/youcompleteme'        " Code completion
+
 Plugin 'easymotion/vim-easymotion'     " easy jumping around
-" Plugin 'timburgess/extempore.vim'
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
-" Plugin 'fholgado/minibufexpl.vim'
-Plugin 'tpope/vim-fireplace'           " clojure list repl
-Plugin 'guns/vim-clojure-static'
-Plugin 'guns/vim-clojure-highlight'
-Plugin 'kien/rainbow_parentheses.vim'
-"Plugin 'guns/vim-sexp'                 " manage lisp sexp
+
+Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
+
+" Lisp The following setup, but with some I haven't investigated yet
+" Plugin 'vim-scripts/paredit.vim' TBD
+" Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'                        " clojure list repl
+Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
+Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
+"Plugin 'guns/vim-sexp'                              " manage lisp sexp
 "Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
-"Plugin 'junegunn/fzf'
-"Plugin 'junegunn/fzf.vim'
-"Plugin 'ntpeters/vim-airline-colornum'
-Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-"Plugin 'craigemery/vim-autotag'        " Doesn't work?
+
+"Plugin 'valloric/youcompleteme'        " Code completion
 
 call vundle#end()
 filetype plugin indent on
@@ -142,8 +141,14 @@ vnoremap / /\v
 " File tree, Tagbar tree
 :map <C-T> :NERDTreeToggle<CR>
 ":map <C-T> :TagbarToggle<CR>
-:map <C-p> :CtrlPMixed<CR>
-nnoremap <C-i> :CtrlPTag<CR>
+":map <C-p> :CtrlPMixed<CR>
+"nnoremap <C-i> :CtrlPTag<CR>
+
+"RG
+set grepprg=rg\ --color=never 
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0
+set wildignore+=*/.git/*,*/tmp/*,*.swp
 
 " Use system clipboard
 :set clipboard=unnamed
@@ -181,6 +186,7 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
+
 autocmd FileType c,cpp setlocal equalprg=clang-format
 nnoremap <C-k><C-d> gg=G''
 
@@ -203,4 +209,12 @@ autocmd GUIEnter * simalt ~x
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --no-ignore --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --hidden --ignore-case --follow --glob "!.git/*"'.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+nnoremap <C-p> :Rg 
 
