@@ -21,7 +21,7 @@ Plugin 'tpope/vim-unimpaired'          " Useful selectors
 Plugin 'bling/vim-airline'             " Fancy status bar
 
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-
+" Plugin 'valloric/youcompleteme'        " Code completion
 Plugin 'easymotion/vim-easymotion'     " easy jumping around
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
@@ -65,6 +65,10 @@ try
     au Syntax * RainbowParenthesesLoadBraces
 catch
 endtry
+
+command! MakeTags !ctags -R .
+command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
+command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
 " ** Leader keys Comma is easier to reach
 let mapleader = ","
