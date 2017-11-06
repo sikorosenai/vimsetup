@@ -8,6 +8,9 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle', '\,')
 filetype off
 call vundle#begin()
 
+let g:python3_host_prog='$MYPYTHON3'
+let g:python_host_prog='$MYPYTHON2'
+
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
 Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
@@ -44,6 +47,7 @@ syntax on
 
 " My prefered escape character (j then k)
 :inoremap jk <esc>
+:tnoremap jk <C-\><C-n>
 
 " Force no use of arrows in normal mode
 nnoremap j gj
@@ -151,11 +155,15 @@ nnoremap <C-i> :CtrlPTag<CR>
 :map <C-z> <Esc>
 :imap <C-z> <Esc>ui
 
-" Control keys - not working?
+" Control + motion for window move
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
 
 " Syntastic
 set statusline+=%#warningmsg#
