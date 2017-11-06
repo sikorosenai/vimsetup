@@ -83,6 +83,9 @@ nnoremap <Leader>t <C-]>
 " Reselect text that was just pasted
 nnoremap <leader>v V`]
 
+nnoremap <leader>B :Bigger<cr>
+nnoremap <leader>b :Smaller<cr>
+
 " Open VimRC in window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
