@@ -8,6 +8,7 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle', '\,')
 filetype off
 call vundle#begin()
 
+let loaded_matchit = 1
 let g:python3_host_prog=$MYPYTHON3
 let g:python_host_prog=$MYPYTHON2
 
@@ -37,10 +38,10 @@ Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
 "Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
 Plugin 'plasticboy/vim-markdown'
 
-"Plugin 'valloric/youcompleteme'        " Code completion
-
 call vundle#end()
 filetype plugin indent on
+
+runtime completion.vim
 
 syntax on
 
@@ -58,10 +59,10 @@ nnoremap gj j
 au FocusLost * :wa
 
 try
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
 catch
 endtry
 
@@ -89,6 +90,9 @@ nnoremap <leader><space> :noh<cr>
 
 " Replace with last yanked
 nnoremap <leader>s diw"0P
+
+" Replace word under cursor
+nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 command! MakeTags !ctags -R .
 
@@ -210,11 +214,11 @@ autocmd GUIEnter * simalt ~x
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --no-ignore --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --hidden --ignore-case --follow --glob "!.git/*"'.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --hidden --ignore-case --follow --glob "!.git/*"'.shellescape(<q-args>), 1,
+            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+            \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+            \   <bang>0)
 
 nnoremap <C-p> :Rg 
 
