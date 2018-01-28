@@ -32,11 +32,8 @@ Plugin 'tpope/vim-fireplace'                        " clojure list repl
 Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
 Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
 Plugin 'plasticboy/vim-markdown'
-<<<<<<< 7ed5627daf01993b77b93993cc5fe23af8a01d85
-=======
 Plugin 'guns/vim-clojure-static'
 Plugin 'tomlion/vim-solidity'
->>>>>>> Config update
 
 call vundle#end()
 filetype plugin indent on
