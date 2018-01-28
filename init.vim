@@ -21,7 +21,6 @@ Plugin 'tpope/vim-unimpaired'          " Useful selectors
 Plugin 'bling/vim-airline'             " Fancy status bar
 
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-" Plugin 'valloric/youcompleteme'        " Code completion
 Plugin 'easymotion/vim-easymotion'     " easy jumping around
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
@@ -29,14 +28,15 @@ Plugin 'mtth/scratch.vim'              " gs scratch window
 Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
 
 " Lisp The following setup, but with some I haven't investigated yet
-" Plugin 'vim-scripts/paredit.vim' TBD
-" Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'                        " clojure list repl
 Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
 Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
-"Plugin 'guns/vim-sexp'                              " manage lisp sexp
-"Plugin 'tpope/vim-sexp-mappings-for-regular-people' " handy mappings sexp
 Plugin 'plasticboy/vim-markdown'
+<<<<<<< 7ed5627daf01993b77b93993cc5fe23af8a01d85
+=======
+Plugin 'guns/vim-clojure-static'
+Plugin 'tomlion/vim-solidity'
+>>>>>>> Config update
 
 call vundle#end()
 filetype plugin indent on
