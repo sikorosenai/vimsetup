@@ -34,6 +34,7 @@ Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
 Plugin 'plasticboy/vim-markdown'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tomlion/vim-solidity'
+Plugin 'justinj/vim-pico8-syntax'
 
 call vundle#end()
 filetype plugin indent on
