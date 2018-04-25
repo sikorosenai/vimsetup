@@ -35,6 +35,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tomlion/vim-solidity'
 Plugin 'justinj/vim-pico8-syntax'
+Plugin 'dahu/VimRegexTutor'
 
 call vundle#end()
 filetype plugin indent on
@@ -136,10 +137,6 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-
-" Always use regex
-nnoremap / /\v
-vnoremap / /\v
 
 " Swap files between source header
 :map <C-k><C-o> :FSHere<CR>
