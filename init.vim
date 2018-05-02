@@ -36,6 +36,22 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'tomlion/vim-solidity'
 Plugin 'justinj/vim-pico8-syntax'
 
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+function! SetGitDir()
+    " Change working dir to the current file
+    cd %:p:h
+    " Set 'gitdir' to be the folder containing .git
+    let gitdir=system("git rev-parse --show-toplevel")
+    " See if the command output starts with 'fatal' (if it does, not in a git repo)
+    let isnotgitdir=matchstr(gitdir, '^fatal:.*')
+    " If it empty, there was no error. Let's cd
+    if empty(isnotgitdir)
+        cd `=gitdir`
+    endif
+endfunction
+
 call vundle#end()
 filetype plugin indent on
 
@@ -70,6 +86,8 @@ command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1'
 
 " ** Leader keys Comma is easier to reach
 let mapleader = ","
+
+nnoremap <Leader>, :Find <CR>
 
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -217,7 +235,7 @@ autocmd GUIEnter * simalt ~x
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --no-ignore --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --no-ignore --line-number --no-heading --fixed-strings --ignore-case --follow --glob "*.cpp" --glob "*.h" --glob "*.hpp" --glob "*.c" --glob "*.txt" --glob "*.cmake" --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* Rg
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always --hidden --ignore-case --follow --glob "!.git/*"'.shellescape(<q-args>), 1,
