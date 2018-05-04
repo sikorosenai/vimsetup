@@ -11,6 +11,7 @@ call vundle#begin()
 let loaded_matchit = 1
 let g:python3_host_prog=$MYPYTHON3
 let g:python_host_prog=$MYPYTHON2
+let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
 
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
 Plugin 'tpope/vim-fugitive'            " Git support
@@ -117,6 +118,14 @@ nnoremap <leader>s diw"0P
 
 " Replace word under cursor
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+nnoremap <Leader>n :Scratch<cr>
+
+" Edit in window at current directory
+" Edit in split at current directory
+map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 command! MakeTags !ctags -R .
 
