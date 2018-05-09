@@ -41,23 +41,14 @@ Plugin 'dahu/VimRegexTutor'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-function! SetGitDir()
-    " Change working dir to the current file
-    cd %:p:h
-    " Set 'gitdir' to be the folder containing .git
-    let gitdir=system("git rev-parse --show-toplevel")
-    " See if the command output starts with 'fatal' (if it does, not in a git repo)
-    let isnotgitdir=matchstr(gitdir, '^fatal:.*')
-    " If it empty, there was no error. Let's cd
-    if empty(isnotgitdir)
-        cd `=gitdir`
-    endif
-endfunction
-
 call vundle#end()
 filetype plugin indent on
 
+" ** Leader keys Comma is easier to reach
+let mapleader = ","
+
 runtime completion.vim
+runtime functions.vim
 
 syntax on
 
@@ -86,9 +77,6 @@ command! MakeTags !ctags -R .
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
-" ** Leader keys Comma is easier to reach
-let mapleader = ","
-
 nnoremap <Leader>, :Find <CR>
 
 " Remove all white space trailing
@@ -104,11 +92,9 @@ nnoremap <leader>v V`]
 nnoremap <leader>B :Bigger<cr>
 nnoremap <leader>b :Smaller<cr>
 
-" Open VimRC in window
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " Switch to a second window
-nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader>ws <C-w>v<C-w>l
 
 " Remove highlight selection
 nnoremap <leader><space> :noh<cr>
@@ -121,11 +107,15 @@ nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 nnoremap <Leader>n :Scratch<cr>
 
+"nnoremap <leader>sw :call SetGitDir()<CR>
+
 " Edit in window at current directory
 " Edit in split at current directory
-map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
+" Open VimRC in window
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 command! MakeTags !ctags -R .
 
@@ -172,7 +162,7 @@ set hlsearch
 :map <C-k><C-W> :FSLeft<CR>
 
 " File tree, Tagbar tree
-:map <C-T> :NERDTreeToggle<CR>
+:map <C-t> :NERDTreeToggle<CR>
 ":map <C-T> :TagbarToggle<CR>
 ":map <C-p> :CtrlPMixed<CR>
 "nnoremap <C-i> :CtrlPTag<CR>
