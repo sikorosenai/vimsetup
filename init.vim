@@ -216,6 +216,10 @@ nnoremap k gk
 nnoremap gk k
 nnoremap gj j
 
+" H and L for tab switching
+nnoremap H gT
+nnoremap L gt
+
 " F9 folds
 inoremap <F9> <C-O>za
 nnoremap <F9> za
@@ -254,6 +258,13 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 nnoremap <C-k><C-d> gg=G''
 " nnoremap <C-p> :Rg 
 
+" Tabs
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+let notabs = 0
+nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 " Auto Commands {{{1
 autocmd FileType c,cpp setlocal equalprg=clang-format
 autocmd GUIEnter * simalt ~x
