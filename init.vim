@@ -12,7 +12,6 @@ call vundle#begin()
 let loaded_matchit = 1
 let g:python3_host_prog=$MYPYTHON3
 let g:python_host_prog=$MYPYTHON2
-let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
 
 " Plugins {{{1
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
@@ -30,7 +29,6 @@ Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
 Plugin 'tpope/vim-fireplace'                        " clojure list repl
 Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
 Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
-Plugin 'plasticboy/vim-markdown'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tomlion/vim-solidity'
 Plugin 'justinj/vim-pico8-syntax'
@@ -39,28 +37,14 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/mru.vim'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'lifepillar/vim-mucomplete'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 filetype plugin indent on
 
-runtime completion.vim
-runtime functions.vim
-
-syntax on
-
-" My prefered escape character (j then k)
-:inoremap jk <esc>
-:tnoremap jk <C-\><C-n>
-
-" Force no use of arrows in normal mode
-nnoremap j gj
-nnoremap k gk
-nnoremap gk k
-nnoremap gj j
-
-" Save when focus is lost
-au FocusLost * :wa
-
+" Rainbow Parentheses {{{2
 try
     au VimEnter * RainbowParenthesesToggle
     au Syntax * RainbowParenthesesLoadRound
@@ -69,9 +53,60 @@ try
 catch
 endtry
 
+" Clang Completion {{{2
+let g:clang_library_path=expand("$MYDROPBOX/Dev/bin")
+set noshowmode shortmess+=c
+set noinfercase
+set completeopt-=preview
+set completeopt+=menuone,noinsert,noselect
+" The following line assumes `brew install llvm` in macOS
+let g:clang_user_options = '-std=c++17'
+let g:clang_hl_errors = 1
+let g:clang_complete_auto = 1
+let g:mucomplete#enable_auto_at_startup = 1
+set completeopt+=menuone
+inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+
+
+" CtrlP {{{2
+set grepprg=rg\ --color=never 
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'Et'
+set wildignore+=*/.git/*,*/tmp/*,*.swp
+
+" RipGrep {{{2
+let g:ackprg = 'rg --vimgrep --no-heading'
+
+" Syntastic {{{2
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%{fugitive#statusline()}
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" Minibuf Explorer {{{2
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+" VimWiki {{{2
+let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" VimScratch {{{2
+let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
+
+syntax on
+
 command! MakeTags !ctags -R .
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
+
 
 " Leaders {{{1
 
@@ -96,7 +131,7 @@ nnoremap <leader>b :Smaller<cr>
 nnoremap <leader>fp :args **/*.vcxproj<cr>:silent! argdo %s/<ClCompile.*\.h.*//g<cr>
 
 " Switch to a second window
-nnoremap <leader>ws <C-w>v<C-w>l
+"nnoremap <leader>ws <C-w>v<C-w>l
 
 " Remove highlight selection
 nnoremap <leader><space> :noh<cr>
@@ -159,6 +194,28 @@ set incsearch
 set showmatch
 set hlsearch
 
+" Use system clipboard
+:set clipboard=unnamed
+
+set guifont=Consolas:h11
+
+" Dark goodness
+set background=dark
+
+colorscheme molokai
+
+
+" Mappings {{{1
+" My prefered escape character (j then k)
+inoremap jk <esc>
+tnoremap jk <C-\><C-n>
+
+" Force no use of arrows in normal mode
+nnoremap j gj
+nnoremap k gk
+nnoremap gk k
+nnoremap gj j
+
 " F9 folds
 inoremap <F9> <C-O>za
 nnoremap <F9> za
@@ -166,32 +223,23 @@ onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
 " Swap files between source header
-:map <C-k><C-o> :FSHere<CR>
-:map <C-k><C-o> :FSHere<CR>
-:map <C-k><C-w> :FSRight<CR>
-:map <C-k><C-W> :FSLeft<CR>
+map <C-k><C-o> :FSHere<CR>
+map <C-k><C-o> :FSHere<CR>
+map <C-k><C-w> :FSRight<CR>
+map <C-k><C-W> :FSLeft<CR>
 
 " File tree, Tagbar tree
-:map <C-t> :NERDTreeToggle<CR>
-":map <C-T> :TagbarToggle<CR>
-":map <C-p> :CtrlPMixed<CR>
+map <C-t> :NERDTreeToggle<CR>
+"map <C-T> :TagbarToggle<CR>
+"map <C-p> :CtrlPMixed<CR>
 "nnoremap <C-i> :CtrlPTag<CR>
 
-"RG
-set grepprg=rg\ --color=never 
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
-set wildignore+=*/.git/*,*/tmp/*,*.swp
-
-" Use system clipboard
-:set clipboard=unnamed
-
-:vmap <C-c> y<Esc>i
-:vmap <C-x> d<Esc>i
-:imap <C-v> <Esc>pi
-:imap <C-y> <Esc>ddi
-:map <C-z> <Esc>
-:imap <C-z> <Esc>ui
+vmap <C-c> y<Esc>i
+vmap <C-x> d<Esc>i
+imap <C-v> <Esc>pi
+imap <C-y> <Esc>ddi
+map <C-z> <Esc>
+imap <C-z> <Esc>ui
 
 " Control + motion for window move
 nnoremap <C-h> <C-w>h
@@ -203,34 +251,15 @@ tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
-" Plugins {{{1
-" Syntastic {{{2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set statusline+=%{fugitive#statusline()}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-" Minibuf explorer
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-
-
-autocmd FileType c,cpp setlocal equalprg=clang-format
 nnoremap <C-k><C-d> gg=G''
+" nnoremap <C-p> :Rg 
 
-set guifont=Consolas:h11
-
-" Dark goodness
-set background=dark
-colorscheme molokai
-
+" Auto Commands {{{1
+autocmd FileType c,cpp setlocal equalprg=clang-format
 autocmd GUIEnter * simalt ~x
+
+" Save when focus is lost
+autocmd FocusLost * :wa
 
 " --column: Show column number
 " --line-number: Show line number
@@ -243,6 +272,7 @@ autocmd GUIEnter * simalt ~x
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --no-ignore --line-number --no-heading --fixed-strings --ignore-case --follow --glob "*.cpp" --glob "*.h" --glob "*.hpp" --glob "*.c" --glob "*.txt" --glob "*.cmake" --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
 command! -bang -nargs=* Rg
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always --hidden --ignore-case --follow --glob "!.git/*"'.shellescape(<q-args>), 1,
@@ -250,6 +280,20 @@ command! -bang -nargs=* Rg
             \           : fzf#vim#with_preview('right:50%:hidden', '?'),
             \   <bang>0)
 
-nnoremap <C-p> :Rg 
+" Functions {{{1
+function! SetGitDir()
+    " Change working dir to the current file
+    cd %:p:h
+    " Set 'gitdir' to be the folder containing .git
+    let gitdir=system("git rev-parse --show-toplevel")
+    " See if the command output starts with 'fatal' (if it does, not in a git repo)
+    let isnotgitdir=matchstr(gitdir, '^fatal:.*')
+    " If it empty, there was no error. Let's cd
+    if empty(isnotgitdir)
+        cd `=gitdir`
+    endif
+endfunction
+
+nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " }}} vim: fdm=marker
