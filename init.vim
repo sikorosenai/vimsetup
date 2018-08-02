@@ -1,3 +1,4 @@
+" Setup {{{1
 set nocompatible
 
 " GVim required the runtime path to contain the startup script folder
@@ -13,6 +14,7 @@ let g:python3_host_prog=$MYPYTHON3
 let g:python_host_prog=$MYPYTHON2
 let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
 
+" Plugins {{{1
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
 Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
@@ -20,15 +22,11 @@ Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 Plugin 'tpope/vim-surround'            " Surround section with ', etc.
 Plugin 'tpope/vim-unimpaired'          " Useful selectors
 Plugin 'bling/vim-airline'             " Fancy status bar
-
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
 Plugin 'easymotion/vim-easymotion'     " easy jumping around
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
-
 Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
-
-" Lisp The following setup, but with some I haven't investigated yet
 Plugin 'tpope/vim-fireplace'                        " clojure list repl
 Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
 Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
@@ -37,15 +35,13 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'tomlion/vim-solidity'
 Plugin 'justinj/vim-pico8-syntax'
 Plugin 'dahu/VimRegexTutor'
-
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'vim-scripts/mru.vim'
+Plugin 'jlanzarotta/bufexplorer'
 
 call vundle#end()
 filetype plugin indent on
-
-" ** Leader keys Comma is easier to reach
-let mapleader = ","
 
 runtime completion.vim
 runtime functions.vim
@@ -77,6 +73,11 @@ command! MakeTags !ctags -R .
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
+" Leaders {{{1
+
+" ** Leader keys Comma is easier to reach
+let mapleader = ","
+
 nnoremap <Leader>, :Find <CR>
 
 " Remove all white space trailing
@@ -92,6 +93,7 @@ nnoremap <leader>v V`]
 nnoremap <leader>B :Bigger<cr>
 nnoremap <leader>b :Smaller<cr>
 
+nnoremap <leader>fp :args **/*.vcxproj<cr>:silent! argdo %s/<ClCompile.*\.h.*//g<cr>
 
 " Switch to a second window
 nnoremap <leader>ws <C-w>v<C-w>l
@@ -119,6 +121,7 @@ nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 command! MakeTags !ctags -R .
 
+" Options {{{1
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -135,9 +138,10 @@ set scrolloff=3
 set autoindent
 set showmode
 set showcmd
-set hidden
+"set hidden
 set wildmenu
 set wildmode=list:longest
+set foldmethod=marker
 
 " Breaks vis white space
 set nocursorline
@@ -199,7 +203,8 @@ tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
-" Syntastic
+" Plugins {{{1
+" Syntastic {{{2
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -247,3 +252,4 @@ command! -bang -nargs=* Rg
 
 nnoremap <C-p> :Rg 
 
+" }}} vim: fdm=marker
