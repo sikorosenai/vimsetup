@@ -155,6 +155,12 @@ set incsearch
 set showmatch
 set hlsearch
 
+" F9 folds
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
 " Swap files between source header
 :map <C-k><C-o> :FSHere<CR>
 :map <C-k><C-o> :FSHere<CR>
