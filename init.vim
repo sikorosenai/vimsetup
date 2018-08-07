@@ -40,6 +40,7 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'lifepillar/vim-mucomplete'
 Plugin 'vimwiki/vimwiki'
+Plugin 'OrangeT/vim-csharp'
 
 call vundle#end()
 filetype plugin indent on
@@ -144,6 +145,7 @@ nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 nnoremap <Leader>n :Scratch<cr>
 
+nnoremap <Leader>. :CtrlPTag<cr>
 "nnoremap <leader>sw :call SetGitDir()<CR>
 
 " Edit in window at current directory
