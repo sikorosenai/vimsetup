@@ -41,6 +41,7 @@ Plugin 'Rip-Rip/clang_complete'
 Plugin 'lifepillar/vim-mucomplete'
 Plugin 'vimwiki/vimwiki'
 Plugin 'OrangeT/vim-csharp'
+Plugin 'szw/vim-maximizer'
 
 call vundle#end()
 filetype plugin indent on
@@ -70,9 +71,11 @@ let g:mucomplete#enable_auto_at_startup = 1
 "inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
 "inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
 
+" NERDTree {{{2
+let NERDTreeHijackNetrw=1
 
 " CtrlP {{{2
-set grepprg=rg\ --color=never 
+set grepprg=rg\ --color=never
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode = 'ra'
@@ -114,10 +117,15 @@ command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1'
 " ** Leader keys Comma is easier to reach
 let mapleader = ","
 
+" Searching
 nnoremap <Leader>, :Find <CR>
+nnoremap <Leader>. :CtrlPTag<cr>
 
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+"nnoremap <leader>B <C-w>\|
+"nnoremap <leader>S <C-w>=
 
 " Tag list and tag jump
 nnoremap <Leader>gt g<C-]>
@@ -125,9 +133,6 @@ nnoremap <Leader>t <C-]>
 
 " Reselect text that was just pasted
 nnoremap <leader>v V`]
-
-nnoremap <leader>B :Bigger<cr>
-nnoremap <leader>b :Smaller<cr>
 
 nnoremap <leader>fp :args **/*.vcxproj<cr>:silent! argdo %s/<ClCompile.*\.h.*//g<cr>
 
@@ -141,7 +146,7 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <leader>s diw"0P
 
 " Replace word under cursor
-nnoremap <Leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 nnoremap <Leader>n :Scratch<cr>
 
