@@ -22,27 +22,28 @@ Plugin 'tpope/vim-surround'            " Surround section with ', etc.
 Plugin 'tpope/vim-unimpaired'          " Useful selectors
 Plugin 'bling/vim-airline'             " Fancy status bar
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-Plugin 'easymotion/vim-easymotion'     " easy jumping around
+Plugin 'easymotion/vim-easymotion'     " easy jumping around - ,,w
 Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
 Plugin 'mtth/scratch.vim'              " gs scratch window
 Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
-Plugin 'tpope/vim-fireplace'                        " clojure list repl
-Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
 Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
-Plugin 'guns/vim-clojure-static'
-Plugin 'tomlion/vim-solidity'
-Plugin 'justinj/vim-pico8-syntax'
 Plugin 'dahu/VimRegexTutor'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'vim-scripts/mru.vim'
-Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/mru.vim'           " :MRU
+Plugin 'jlanzarotta/bufexplorer'       " :be
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'lifepillar/vim-mucomplete'
 Plugin 'vimwiki/vimwiki'
 Plugin 'OrangeT/vim-csharp'
 Plugin 'szw/vim-maximizer'
 
+"Plugin 'guns/vim-clojure-static'
+"Plugin 'tomlion/vim-solidity'
+"Plugin 'tpope/vim-fireplace'                        " clojure list repl
+"Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
+"Plugin 'justinj/vim-pico8-syntax'
+"
 call vundle#end()
 filetype plugin indent on
 
@@ -136,8 +137,8 @@ nnoremap <leader>v V`]
 
 nnoremap <leader>fp :args **/*.vcxproj<cr>:silent! argdo %s/<ClCompile.*\.h.*//g<cr>
 
-" Switch to a second window
-"nnoremap <leader>ws <C-w>v<C-w>l
+" switch to a second window
+"nnoremap <leader>ws <c-w>v<c-w>l
 
 " Remove highlight selection
 nnoremap <leader><space> :noh<cr>
@@ -210,7 +211,6 @@ set guifont=Consolas:h11
 set background=dark
 
 colorscheme molokai
-
 
 " Mappings {{{1
 " My prefered escape character (j then k)
