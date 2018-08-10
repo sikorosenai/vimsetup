@@ -37,6 +37,7 @@ Plugin 'lifepillar/vim-mucomplete'
 Plugin 'vimwiki/vimwiki'
 Plugin 'OrangeT/vim-csharp'
 Plugin 'szw/vim-maximizer'
+Plugin 'junegunn/vim-easy-align'
 
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'tomlion/vim-solidity'
@@ -222,6 +223,11 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gk k
 nnoremap gj j
+
+"" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " H and L for tab switching
 nnoremap H gT
