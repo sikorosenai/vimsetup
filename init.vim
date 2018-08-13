@@ -19,17 +19,15 @@ Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
 Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 Plugin 'tpope/vim-surround'            " Surround section with ', etc.
-Plugin 'tpope/vim-unimpaired'          " Useful selectors
+Plugin 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
 Plugin 'bling/vim-airline'             " Fancy status bar
 Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
 Plugin 'easymotion/vim-easymotion'     " easy jumping around - ,,w
-Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header
+Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header. FSHere, FSRight
 Plugin 'mtth/scratch.vim'              " gs scratch window
 Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
-Plugin 'kien/rainbow_parentheses.vim'               " Color brackets
-Plugin 'dahu/VimRegexTutor'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plugin 'kien/rainbow_parentheses.vim'  " Color brackets
+Plugin 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
 Plugin 'vim-scripts/mru.vim'           " :MRU
 Plugin 'jlanzarotta/bufexplorer'       " :be
 Plugin 'Rip-Rip/clang_complete'
@@ -39,12 +37,16 @@ Plugin 'OrangeT/vim-csharp'
 Plugin 'szw/vim-maximizer'
 Plugin 'junegunn/vim-easy-align'
 
+" These only necessary for :find; since I can't find better Rg setup yet
+Plugin 'junegunn/fzf'                  " Fuzzy finder
+Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
+
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'tomlion/vim-solidity'
 "Plugin 'tpope/vim-fireplace'                        " clojure list repl
 "Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
 "Plugin 'justinj/vim-pico8-syntax'
-"
+
 call vundle#end()
 filetype plugin indent on
 
@@ -83,6 +85,8 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'Et'
 set wildignore+=*/.git/*,*/tmp/*,*.swp
+
+nnoremap <Leader>g :silent lgrep<Space>
 
 " RipGrep {{{2
 let g:ackprg = 'rg --vimgrep --no-heading'
@@ -242,7 +246,8 @@ vnoremap <F9> zf
 " Swap files between source header
 map <C-k><C-o> :FSHere<CR>
 map <C-k><C-o> :FSHere<CR>
-map <C-k><C-w> :FSRight<CR>
+map <C-k><C-l> :FSRight<CR>
+map <C-k><C-v> :FSSplitRight<CR>
 map <C-k><C-W> :FSLeft<CR>
 
 " File tree, Tagbar tree
