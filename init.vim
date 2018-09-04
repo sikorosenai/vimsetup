@@ -34,10 +34,10 @@ Plugin 'Rip-Rip/clang_complete'
 Plugin 'lifepillar/vim-mucomplete'
 Plugin 'vimwiki/vimwiki'
 Plugin 'OrangeT/vim-csharp'
-Plugin 'szw/vim-maximizer'
+Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
 Plugin 'junegunn/vim-easy-align'
 
-" These only necessary for :find; since I can't find better Rg setup yet
+" Use FZF for searching in files using Rg
 Plugin 'junegunn/fzf'                  " Fuzzy finder
 Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
@@ -49,6 +49,9 @@ Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
 call vundle#end()
 filetype plugin indent on
+filetype plugin on
+
+" Fuzzy Finder {{{2
 
 " Rainbow Parentheses {{{2
 try
@@ -92,14 +95,14 @@ nnoremap <Leader>g :silent lgrep<Space>
 let g:ackprg = 'rg --vimgrep --no-heading'
 
 " Syntastic {{{2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set statusline+=%{fugitive#statusline()}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"set statusline+=%{fugitive#statusline()}
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
 
 " Minibuf Explorer {{{2
 let g:miniBufExplMapWindowNavVim = 1
@@ -107,11 +110,10 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 " VimWiki {{{2
-let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 " VimScratch {{{2
 let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
 
-syntax on
 
 command! MakeTags !ctags -R .
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
@@ -190,6 +192,10 @@ set showcmd
 set wildmenu
 set wildmode=list:longest
 set foldmethod=marker
+
+"vimwiki
+set nocompatible
+syntax on
 
 " Breaks vis white space
 set nocursorline
@@ -270,10 +276,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " conflict with searches.  Used to switch windows while editing
-"tnoremap <C-h> <C-\><C-N><C-w>h
-"tnoremap <C-j> <C-\><C-N><C-w>j
-"tnoremap <C-k> <C-\><C-N><C-w>k
-"tnoremap <C-l> <C-\><C-N><C-w>l
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
 
 nnoremap <C-k><C-d> gg=G''
 " nnoremap <C-p> :Rg 
@@ -299,27 +305,7 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
-" Override Colors command. You can safely do this in your .vimrc as fzf.vim
-" will not override existing commands.
-command! -bang Colors
-  \ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'}, <bang>0)
-
-" Augmenting Ag command using fzf#vim#with_preview function
-"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
-"     * For syntax-highlighting, Ruby and any of the following tools are required:
-"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
-"       - CodeRay: http://coderay.rubychan.de/
-"       - Rouge: https://github.com/jneen/rouge
-"
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-
-" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
@@ -327,9 +313,6 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " Functions {{{1
 function! SetGitDir()
     " Change working dir to the current file
