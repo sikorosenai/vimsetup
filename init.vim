@@ -259,7 +259,7 @@ map <C-t> :NERDTreeToggle<CR>
 vmap <C-c> y<Esc>i
 vmap <C-x> d<Esc>i
 imap <C-v> <Esc>pi
-imap <C-y> <Esc>ddi
+"imap <C-y> <Esc>ddi
 map <C-z> <Esc>
 imap <C-z> <Esc>ui
 
