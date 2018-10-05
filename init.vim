@@ -36,6 +36,8 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'OrangeT/vim-csharp'
 Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
 Plugin 'junegunn/vim-easy-align'
+Plugin 'vhdirk/vim-cmake'
+Plugin 'markonm/traces.vim'
 
 " Use FZF for searching in files using Rg
 Plugin 'junegunn/fzf'                  " Fuzzy finder
