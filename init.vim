@@ -222,7 +222,7 @@ colorscheme molokai
 inoremap jk <esc>
 tnoremap jk <C-\><C-n>
 
-" Force no use of arrows in normal mode
+" Move by buffer lines
 nnoremap j gj
 nnoremap k gk
 nnoremap gk k
