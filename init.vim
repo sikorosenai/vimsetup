@@ -43,6 +43,9 @@ Plugin 'markonm/traces.vim'
 Plugin 'junegunn/fzf'                  " Fuzzy finder
 Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
+
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'tomlion/vim-solidity'
 "Plugin 'tpope/vim-fireplace'                        " clojure list repl
@@ -52,6 +55,13 @@ Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 call vundle#end()
 filetype plugin indent on
 filetype plugin on
+
+" FSwitch {{{2
+let g:fsnonewfiles=1
+au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '../inc/**/,source'
+
+" Prosession {{{2
+let g:prosession_dir=$MYDROPBOX.'/.vim/session'
 
 " Fuzzy Finder {{{2
 
@@ -86,9 +96,10 @@ let NERDTreeHijackNetrw=1
 " CtrlP {{{2
 set grepprg=rg\ --color=never
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
+let g:ctrlp_use_caching = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'Et'
+let g:ctrlp_root_markers = ['Grfx']
 set wildignore+=*/.git/*,*/tmp/*,*.swp
 
 nnoremap <Leader>g :silent lgrep<Space>
