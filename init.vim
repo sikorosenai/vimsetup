@@ -32,7 +32,10 @@ Plugin 'vim-scripts/mru.vim'           " :MRU
 Plugin 'jlanzarotta/bufexplorer'       " :be
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'lifepillar/vim-mucomplete'
+
 Plugin 'vimwiki/vimwiki'
+Plugin 'mattn/calendar-vim'
+
 Plugin 'OrangeT/vim-csharp'
 Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
 Plugin 'junegunn/vim-easy-align'
@@ -58,7 +61,9 @@ filetype plugin on
 
 " FSwitch {{{2
 let g:fsnonewfiles=1
-au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '../inc/**/,source'
+au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '../Inc/**/,source'
+au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../../Src/,source'
+
 
 " Prosession {{{2
 let g:prosession_dir=$MYDROPBOX.'/.vim/session'
@@ -123,7 +128,25 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 " VimWiki {{{2
-let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/'},
+            \   {'path': $MYDROPBOX.'/techwiki/'}]
+
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+
+
 " VimScratch {{{2
 let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
 
