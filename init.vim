@@ -30,8 +30,12 @@ Plugin 'kien/rainbow_parentheses.vim'  " Color brackets
 Plugin 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
 Plugin 'vim-scripts/mru.vim'           " :MRU
 Plugin 'jlanzarotta/bufexplorer'       " :be
-Plugin 'Rip-Rip/clang_complete'
-Plugin 'lifepillar/vim-mucomplete'
+" Plugin 'Rip-Rip/clang_complete'
+" Plugin 'lifepillar/vim-mucomplete'
+
+" Completion
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'zchee/deoplete-clang'
 
 Plugin 'vimwiki/vimwiki'
 Plugin 'mattn/calendar-vim'
@@ -58,6 +62,9 @@ Plugin 'dhruvasagar/vim-prosession'
 call vundle#end()
 filetype plugin indent on
 filetype plugin on
+
+" Deoplte {{2
+let g:deoplete#enable_at_startup = 1
 
 " FSwitch {{{2
 let g:fsnonewfiles=1
