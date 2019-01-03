@@ -52,7 +52,7 @@ Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
-
+Plugin 'kovisoft/slimv'
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'tomlion/vim-solidity'
 "Plugin 'tpope/vim-fireplace'                        " clojure list repl
