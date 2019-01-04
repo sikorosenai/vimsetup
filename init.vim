@@ -35,7 +35,7 @@ Plugin 'jlanzarotta/bufexplorer'       " :be
 
 " Completion
 Plugin 'Shougo/deoplete.nvim'
-Plugin 'zchee/deoplete-clang'
+Plugin 'tweekmonster/deoplete-clang2'
 
 Plugin 'vimwiki/vimwiki'
 Plugin 'mattn/calendar-vim'
@@ -161,7 +161,6 @@ let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
 command! MakeTags !ctags -R .
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
-
 
 " Leaders {{{1
 
