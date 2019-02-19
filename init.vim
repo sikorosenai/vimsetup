@@ -35,7 +35,7 @@ Plugin 'jlanzarotta/bufexplorer'       " :be
 
 " Completion
 Plugin 'Shougo/deoplete.nvim'
-Plugin 'tweekmonster/deoplete-clang2'
+Plugin 'deoplete-plugins/deoplete-clang'
 
 Plugin 'vimwiki/vimwiki'
 Plugin 'mattn/calendar-vim'
@@ -354,6 +354,15 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
 
 " Functions {{{1
 function! SetGitDir()
