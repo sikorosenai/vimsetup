@@ -34,7 +34,7 @@ Plugin 'jlanzarotta/bufexplorer'       " :be
 " Plugin 'lifepillar/vim-mucomplete'
 
 " Completion
-Plugin 'Shougo/deoplete.nvim'
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'deoplete-plugins/deoplete-clang'
 
 Plugin 'vimwiki/vimwiki'
@@ -153,6 +153,10 @@ function! ToggleCalendar()
   end
 endfunction
 
+:map >> <Plug>VimwikiIncreaseLvlSingleItem
+:map >>> <Plug>VimwikiIncreaseLvlWholeItem
+:map << <Plug>VimwikiDecreaseLvlSingleItem
+:map <<< <Plug>VimwikiDecreaseLvlWholeItem
 
 " VimScratch {{{2
 let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
@@ -234,6 +238,7 @@ set showcmd
 set wildmenu
 set wildmode=list:longest
 set foldmethod=marker
+set equalalways
 
 "vimwiki
 set nocompatible
