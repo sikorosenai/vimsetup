@@ -32,6 +32,8 @@ Plugin 'vim-scripts/mru.vim'           " :MRU
 Plugin 'jlanzarotta/bufexplorer'       " :be
 " Plugin 'Rip-Rip/clang_complete'
 " Plugin 'lifepillar/vim-mucomplete'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'jalcine/cmake.vim'
 
 " Completion
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -65,6 +67,14 @@ filetype plugin on
 
 " Deoplte {{2
 let g:deoplete#enable_at_startup = 1
+
+" ASyncRun {{
+:noremap <A-b> :AsyncRun cd build && cmake --build . <cr>
+:noremap <F8> :cnext <cr>
+
+augroup vimrc
+autocmd QuickFixCmdPost * botright copen 8
+augroup END<cr> 
 
 " FSwitch {{{2
 let g:fsnonewfiles=1
@@ -234,7 +244,7 @@ set scrolloff=3
 set autoindent
 set showmode
 set showcmd
-"set hidden
+set hidden
 set wildmenu
 set wildmode=list:longest
 set foldmethod=marker
@@ -329,7 +339,6 @@ tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 
 nnoremap <C-k><C-d> gg=G''
-" nnoremap <C-p> :Rg 
 
 " Tabs
 nnoremap <C-Left> :tabprevious<CR>
@@ -351,14 +360,6 @@ command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-
-" Similarly, we can apply it to fzf#vim#grep. To use ripgrep
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
 
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
