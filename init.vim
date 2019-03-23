@@ -33,7 +33,7 @@ Plugin 'jlanzarotta/bufexplorer'       " :be
 " Plugin 'Rip-Rip/clang_complete'
 " Plugin 'lifepillar/vim-mucomplete'
 Plugin 'skywind3000/asyncrun.vim'
-Plugin 'jalcine/cmake.vim'
+" Plugin 'jalcine/cmake.vim'
 
 " Completion
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -53,7 +53,7 @@ Plugin 'junegunn/fzf'                  " Fuzzy finder
 Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
 Plugin 'tpope/vim-obsession'
-Plugin 'dhruvasagar/vim-prosession'
+"Plugin 'dhruvasagar/vim-prosession'
 Plugin 'kovisoft/slimv'
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'tomlion/vim-solidity'
