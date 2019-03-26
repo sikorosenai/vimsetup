@@ -88,7 +88,7 @@ filetype plugin on
 " Deoplte {{2
 let g:deoplete#enable_at_startup = 1
 
-" Haskell {{
+" Haskell {{2
 let g:ghcid_keep_open = 1
 " ----- neovimhaskell/haskell-vim -----
 
@@ -103,7 +103,7 @@ let g:haskell_indent_let_no_in = 0
 
 " ----- hindent & stylish-haskell -----
 " Indenting on save is too aggressive for me
-let g:hindent_on_save = 1
+let g:hindent_on_save = 0 
 
 " Helper function, called below with mappings
 function! HaskellFormat(which) abort
