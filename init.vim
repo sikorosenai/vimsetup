@@ -30,10 +30,7 @@ Plugin 'kien/rainbow_parentheses.vim'  " Color brackets
 Plugin 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
 Plugin 'vim-scripts/mru.vim'           " :MRU
 Plugin 'jlanzarotta/bufexplorer'       " :be
-" Plugin 'Rip-Rip/clang_complete'
-" Plugin 'lifepillar/vim-mucomplete'
 Plugin 'skywind3000/asyncrun.vim'
-" Plugin 'jalcine/cmake.vim'
 
 " Completion
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -52,20 +49,37 @@ Plugin 'markonm/traces.vim'
 Plugin 'junegunn/fzf'                  " Fuzzy finder
 Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
+" Session stuff haven't ever used
 Plugin 'tpope/vim-obsession'
-"Plugin 'dhruvasagar/vim-prosession'
-Plugin 'kovisoft/slimv'
-"Plugin 'guns/vim-clojure-static'
-"Plugin 'tomlion/vim-solidity'
-"Plugin 'tpope/vim-fireplace'                        " clojure list repl
-"Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
-"Plugin 'justinj/vim-pico8-syntax'
 
-Plugin 'w0rp/ale'
+" ?
+Plugin 'kovisoft/slimv'
+
+" Tab for completion
+Plugin 'ervandew/supertab'
+
+" Haskell
+Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'alx741/vim-hindent'
-Plugin 'parsonsmatt/intero-neovim'
 
+" Clojure
+"Plugin 'guns/vim-clojure-static'
+"Plugin 'tpope/vim-fireplace'                        " clojure list repl
+"Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
+
+" Pico 8
+"Plugin 'justinj/vim-pico8-syntax'
+
+" Linux TBD
+"Plugin 'jalcine/cmake.vim'
+"Plugin 'dhruvasagar/vim-prosession'
+
+"Plugin 'w0rp/ale'
+"Plugin 'autozimu/LanguageClient-neovim'
+"Plugin 'parsonsmatt/intero-neovim'
+"Plugin 'neomake/neomake'
+"Plugin 'bitc/vim-hdevtools'
 
 call vundle#end()
 filetype plugin indent on
@@ -75,6 +89,7 @@ filetype plugin on
 let g:deoplete#enable_at_startup = 1
 
 " Haskell {{
+let g:ghcid_keep_open = 1
 " ----- neovimhaskell/haskell-vim -----
 
 " Align 'then' two spaces after 'if'
@@ -87,9 +102,8 @@ let g:haskell_indent_case_alternative = 1
 let g:haskell_indent_let_no_in = 0
 
 " ----- hindent & stylish-haskell -----
-
 " Indenting on save is too aggressive for me
-let g:hindent_on_save = 0
+let g:hindent_on_save = 1
 
 " Helper function, called below with mappings
 function! HaskellFormat(which) abort
@@ -114,37 +128,7 @@ augroup haskellStylish
 augroup END
 
 " ----- w0rp/ale -----
-
-"let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
-
-" ----- parsonsmatt/intero-neovim -----
-
-" Prefer starting Intero manually (faster startup times)
-let g:intero_start_immediately = 0
-" Use ALE (works even when not using Intero)
-let g:intero_use_neomake = 0
-
-augroup interoMaps
-  au!
-
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-  au FileType haskell map <leader>t <Plug>InteroGenericType
-  au FileType haskell map <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-  au FileType haskell nnoremap <silent> <leader>iu :InteroUses<CR>
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-augroup END
+"let g:ale_linters.haskell = ['hlint']
 
 " ASyncRun {{
 :noremap <A-b> :AsyncRun cd build && cmake --build . <cr>
@@ -351,7 +335,7 @@ set hlsearch
 " Use system clipboard
 :set clipboard=unnamed
 
-set guifont=Consolas:h11
+set guifont=Consolas:h12:cANSI
 
 " Dark goodness
 set background=dark
