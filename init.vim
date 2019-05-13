@@ -31,17 +31,18 @@ Plugin 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
 Plugin 'vim-scripts/mru.vim'           " :MRU
 Plugin 'jlanzarotta/bufexplorer'       " :be
 Plugin 'skywind3000/asyncrun.vim'
+Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
+Plugin 'junegunn/vim-easy-align'
 
 " Completion
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'deoplete-plugins/deoplete-clang'
 
+" Wiki
 Plugin 'vimwiki/vimwiki'
 Plugin 'mattn/calendar-vim'
 
 Plugin 'OrangeT/vim-csharp'
-Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
-Plugin 'junegunn/vim-easy-align'
 Plugin 'vhdirk/vim-cmake'
 Plugin 'markonm/traces.vim'
 
