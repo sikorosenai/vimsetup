@@ -335,7 +335,7 @@ set hlsearch
 " Use system clipboard
 :set clipboard=unnamed
 
-set guifont=Consolas:h12:cANSI
+set guifont=Consolas:h11:cANSI
 
 " Dark goodness
 set background=dark
