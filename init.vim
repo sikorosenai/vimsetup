@@ -17,7 +17,7 @@ let g:python_host_prog=$MYPYTHON2
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
 Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
-Plugin 'scrooloose/nerdcommenter'      " Comment code sections
+"Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 Plugin 'tpope/vim-surround'            " Surround section with ', etc.
 Plugin 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
 Plugin 'bling/vim-airline'             " Fancy status bar
@@ -33,6 +33,13 @@ Plugin 'jlanzarotta/bufexplorer'       " :be
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
 Plugin 'junegunn/vim-easy-align'
+Plugin 'RRethy/vim-illuminate'
+
+"Swift
+Plugin 'keith/swift.vim'
+
+"C++
+"Plugin 'JBakamovic/cxxd-vim'
 
 " Completion
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -43,8 +50,8 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'mattn/calendar-vim'
 
 Plugin 'OrangeT/vim-csharp'
-Plugin 'vhdirk/vim-cmake'
 Plugin 'markonm/traces.vim'
+"Plugin 'tpope/vim-dispatch'
 
 " Use FZF for searching in files using Rg
 Plugin 'junegunn/fzf'                  " Fuzzy finder
@@ -60,9 +67,9 @@ Plugin 'kovisoft/slimv'
 Plugin 'ervandew/supertab'
 
 " Haskell
-Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-Plugin 'neovimhaskell/haskell-vim'
-Plugin 'alx741/vim-hindent'
+"Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+"Plugin 'neovimhaskell/haskell-vim'
+"Plugin 'alx741/vim-hindent'
 
 " Clojure
 "Plugin 'guns/vim-clojure-static'
@@ -79,9 +86,21 @@ Plugin 'alx741/vim-hindent'
 "Plugin 'w0rp/ale'
 "Plugin 'autozimu/LanguageClient-neovim'
 "Plugin 'parsonsmatt/intero-neovim'
-"Plugin 'neomake/neomake'
+Plugin 'neomake/neomake'
 "Plugin 'bitc/vim-hdevtools'
+"
+Plugin 'mh21/errormarker.vim'
 
+" Thanks to https://forums.handmadehero.org/index.php/forum?view=topic&catid=4&id=704#3982
+" error message formats
+" Microsoft MSBuild
+set errorformat+=\\\ %#%f(%l\\\,%c):\ %m
+" Microsoft compiler: cl.exe
+set errorformat+=\\\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %m
+" Microsoft HLSL compiler: fxc.exe
+set errorformat+=\\\ %#%f(%l\\\,%c-%*[0-9]):\ %#%t%[A-z]%#\ %m
+
+let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
 call vundle#end()
 filetype plugin indent on
 filetype plugin on
@@ -132,7 +151,7 @@ augroup END
 "let g:ale_linters.haskell = ['hlint']
 
 " ASyncRun {{
-:noremap <A-b> :AsyncRun cd build && cmake --build . <cr>
+:noremap <Leader>b :AsyncRun cd <root>/build && cmake --build . <cr>
 :noremap <F8> :cnext <cr>
 
 augroup vimrc
@@ -260,8 +279,9 @@ nnoremap <Leader>t <C-]>
 " Reselect text that was just pasted
 nnoremap <leader>v V`]
 
-nnoremap <leader>fp :args **/*.vcxproj<cr>:silent! argdo %s/<ClCompile.*\.h.*//g<cr>
+"nnoremap <leader>fp :args **/*.vcxproj<cr>:silent! argdo %s/<ClCompile.*\.h.*//g<cr>
 
+nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 " switch to a second window
 "nnoremap <leader>ws <c-w>v<c-w>l
 
@@ -311,6 +331,7 @@ set wildmenu
 set wildmode=list:longest
 set foldmethod=marker
 set equalalways
+set termguicolors
 
 "vimwiki
 set nocompatible
@@ -408,13 +429,15 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 let notabs = 0
-nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
+nnoremap <silent> <F6> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 " Auto Commands {{{1
 autocmd FileType c,cpp setlocal equalprg=clang-format
 autocmd GUIEnter * simalt ~x
 
 " Save when focus is lost
 autocmd FocusLost * :wa
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
