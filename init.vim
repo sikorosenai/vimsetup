@@ -17,7 +17,6 @@ let g:python_host_prog=$MYPYTHON2
 Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
 Plugin 'tpope/vim-fugitive'            " Git support
 Plugin 'scrooloose/nerdtree'           " Tree browser
-"Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 Plugin 'tpope/vim-surround'            " Surround section with ', etc.
 Plugin 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
 Plugin 'bling/vim-airline'             " Fancy status bar
@@ -38,9 +37,6 @@ Plugin 'RRethy/vim-illuminate'
 "Swift
 Plugin 'keith/swift.vim'
 
-"C++
-"Plugin 'JBakamovic/cxxd-vim'
-
 " Completion
 Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'deoplete-plugins/deoplete-clang'
@@ -51,7 +47,6 @@ Plugin 'mattn/calendar-vim'
 
 Plugin 'OrangeT/vim-csharp'
 Plugin 'markonm/traces.vim'
-"Plugin 'tpope/vim-dispatch'
 
 " Use FZF for searching in files using Rg
 Plugin 'junegunn/fzf'                  " Fuzzy finder
@@ -66,11 +61,18 @@ Plugin 'kovisoft/slimv'
 " Tab for completion
 Plugin 'ervandew/supertab'
 
+Plugin 'mh21/errormarker.vim'
+
+"Plugin 'scrooloose/nerdcommenter'      " Comment code sections
 " Haskell
 "Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 "Plugin 'neovimhaskell/haskell-vim'
 "Plugin 'alx741/vim-hindent'
 
+"Plugin 'tpope/vim-dispatch'
+"Plugin 'bitc/vim-hdevtools'
+"C++
+"Plugin 'JBakamovic/cxxd-vim'
 " Clojure
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'tpope/vim-fireplace'                        " clojure list repl
@@ -86,12 +88,8 @@ Plugin 'ervandew/supertab'
 "Plugin 'w0rp/ale'
 "Plugin 'autozimu/LanguageClient-neovim'
 "Plugin 'parsonsmatt/intero-neovim'
-Plugin 'neomake/neomake'
-"Plugin 'bitc/vim-hdevtools'
-"
-Plugin 'mh21/errormarker.vim'
-
 " Thanks to https://forums.handmadehero.org/index.php/forum?view=topic&catid=4&id=704#3982
+"
 " error message formats
 " Microsoft MSBuild
 set errorformat+=\\\ %#%f(%l\\\,%c):\ %m
@@ -151,12 +149,22 @@ augroup END
 "let g:ale_linters.haskell = ['hlint']
 
 " ASyncRun {{
-:noremap <Leader>b :AsyncRun cd <root>/build && cmake --build . <cr>
 :noremap <F8> :cnext <cr>
+:noremap <S-F8> :cprev <cr>
 
-augroup vimrc
-autocmd QuickFixCmdPost * botright copen 8
-augroup END<cr> 
+" automatically open quickfix window when AsyncRun command is executed
+" set the quickfix window 6 lines height.
+let g:asyncrun_open = 6
+
+" ring the bell to notify you job finished
+let g:asyncrun_bell = 1
+
+" F10 to toggle quickfix window
+nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+
+"augroup vimrc
+"autocmd QuickFixCmdPost * botright copen 8
+"augroup END<cr> 
 
 " FSwitch {{{2
 let g:fsnonewfiles=1
@@ -306,6 +314,8 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
+:noremap <leader>b :AsyncRun cd <root>/build && cmake --build . <cr>
 
 command! MakeTags !ctags -R .
 
