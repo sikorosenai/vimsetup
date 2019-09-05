@@ -168,8 +168,8 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " FSwitch {{{2
 let g:fsnonewfiles=1
-au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:|src|include/zep|,../Inc/**/,source'
-au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:|include.*zep|src|,../../Src/,source'
+au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,source'
+au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:/include/src/,reg:|include.*zep|include/src|src|,../../Src/,source'
 
 " Prosession {{{2
 let g:prosession_dir=$MYDROPBOX.'/.vim/session'
