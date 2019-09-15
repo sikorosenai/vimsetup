@@ -237,6 +237,14 @@ let g:miniBufExplModSelTarget = 1
 let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/'},
             \   {'path': $MYDROPBOX.'/techwiki/'}]
 
+hi VimwikiHeader1 guifg=#FDA01F
+hi VimwikiHeader2 guifg=#22DD11
+hi VimwikiHeader3 guifg=#99BBFF
+hi VimwikiHeader4 guifg=#FF00FF
+hi VimwikiHeader5 guifg=#00FFFF
+hi VimwikiHeader6 guifg=#FFFF00
+hi link VimwikiLink Keyword
+
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
 function! ToggleCalendar()
   execute ":Calendar"
