@@ -328,6 +328,7 @@ nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 command! MakeTags !ctags -R .
 
 " Options {{{1
+set omnifunc=syntaxcomplete#Complete
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -418,14 +419,14 @@ map <C-k><C-W> :FSLeft<CR>
 map <C-t> :NERDTreeToggle<CR>
 "map <C-T> :TagbarToggle<CR>
 "map <C-p> :CtrlPMixed<CR>
-"nnoremap <C-i> :CtrlPTag<CR>
+",nnoremap <C-i> :CtrlPTag<CR>
 
-vmap <C-c> y<Esc>i
-vmap <C-x> d<Esc>i
-imap <C-v> <Esc>pi
+"vmap <C-c> y<Esc>i
+"vmap <C-x> d<Esc>i
+"imap <C-v> <Esc>pi
 "imap <C-y> <Esc>ddi
-map <C-z> <Esc>
-imap <C-z> <Esc>ui
+"map <C-z> <Esc>
+"imap <C-z> <Esc>ui
 
 " Control + motion for window move
 nnoremap <C-h> <C-w>h
