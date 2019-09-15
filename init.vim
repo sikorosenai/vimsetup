@@ -243,7 +243,7 @@ hi VimwikiHeader3 guifg=#99BBFF
 hi VimwikiHeader4 guifg=#FF00FF
 hi VimwikiHeader5 guifg=#00FFFF
 hi VimwikiHeader6 guifg=#FFFF00
-hi link VimwikiLink Keyword
+hi link VimwikiLink Typedef
 
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
 function! ToggleCalendar()
