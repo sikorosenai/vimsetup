@@ -13,52 +13,53 @@ let g:python_host_prog=$MYPYTHON2
 
 " Plugins {{{1
 call plug#begin('~/.vim/plugged')
-"Plug 'tpope/vim-fugitive'            " Git support
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }    " Tree browser
-"Plug 'tpope/vim-surround'            " Surround section with ', etc.
-"Plug 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
-"Plug 'bling/vim-airline'             " Fancy status bar
-"Plug 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-"Plug 'easymotion/vim-easymotion'     " easy jumping around - ,,w
-"Plug 'derekwyatt/vim-fswitch'        " Switch between cpp/header. FSHere, FSRight
-"Plug 'mtth/scratch.vim'              " gs scratch window
-"Plug 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
-"Plug 'kien/rainbow_parentheses.vim'  " Color brackets
-"Plug 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
-"Plug 'vim-scripts/mru.vim'           " :MRU
-"Plug 'jlanzarotta/bufexplorer'       " :be
-"Plug 'skywind3000/asyncrun.vim'
-"Plug 'szw/vim-maximizer'             " F3 to min/max the current buffer
-"Plug 'junegunn/vim-easy-align'
-"Plug 'RRethy/vim-illuminate'
+Plug 'tpope/vim-fugitive'            " Git support
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }    " Tree browser
+Plug 'tpope/vim-surround'            " Surround section with ', etc.
+Plug 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
+Plug 'bling/vim-airline'             " Fancy status bar
+Plug 'airblade/vim-gitgutter'        " git info in the gutter, hunk
+Plug 'easymotion/vim-easymotion'     " easy jumping around - ,,w
+Plug 'derekwyatt/vim-fswitch'        " Switch between cpp/header. FSHere, FSRight
+Plug 'mtth/scratch.vim'              " gs scratch window
+Plug 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
+Plug 'kien/rainbow_parentheses.vim'  " Color brackets
+Plug 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
+Plug 'vim-scripts/mru.vim'           " :MRU
+Plug 'jlanzarotta/bufexplorer'       " :be
+Plug 'skywind3000/asyncrun.vim'
+Plug 'szw/vim-maximizer'             " F3 to min/max the current buffer
+Plug 'junegunn/vim-easy-align'
+Plug 'RRethy/vim-illuminate'
 
-"Swift
-"Plug 'keith/swift.vim'
+" Swift
+Plug 'keith/swift.vim'
 
 " Completion
-" Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plugin 'deoplete-plugins/deoplete-clang'
-"
-"Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
+
+Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
 
 " Wiki
-"Plug 'vimwiki/vimwiki'
-"Plug 'mattn/calendar-vim'
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
 
-"Plug 'OrangeT/vim-csharp'
-"Plug 'markonm/traces.vim'
+Plug 'OrangeT/vim-csharp'
+Plug 'markonm/traces.vim'
 
 " UsFZF for searching in files using Rg
-"Plug 'junegunn/fzf'                  " Fuzzy finder
-"Plug 'junegunn/fzf.vim'              " Fuzzy finder vim extension
+Plug 'junegunn/fzf'                  " Fuzzy finder
+Plug 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
 " Session stuff haven't ever used
-"Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
 
 " ?
-"Plug 'kovisoft/slimv'
+Plug 'kovisoft/slimv'
 
-"Plug 'mh21/errormarker.vim'
+Plug 'mh21/errormarker.vim'
+call plug#end()
 
 " Thanks to https://forums.handmadehero.org/index.php/forum?view=topic&catid=4&id=704#3982
 "
@@ -74,6 +75,7 @@ let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
 filetype plugin indent on
 filetype plugin on
 
+
 " FSwitch {{{2
 let g:fsnonewfiles=1
 au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,source'
@@ -85,13 +87,13 @@ let g:prosession_dir=$MYDROPBOX.'/.vim/session'
 " Fuzzy Finder {{{2
 
 " Rainbow Parentheses {{{2
-"try
-"    au VimEnter * RainbowParenthesesToggle
-"    au Syntax * RainbowParenthesesLoadRound
-"    au Syntax * RainbowParenthesesLoadSquare
-"    au Syntax * RainbowParenthesesLoadBraces
-"catch
-"endtry
+try
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
+catch
+endtry
 
 " Clang Completion {{{2
 let g:clang_library_path=expand("$MYDROPBOX/Dev/bin")
@@ -463,3 +465,6 @@ endfunction
 nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " }}} vim: fdm=marker
+"
+" Load Others
+source coc.vim

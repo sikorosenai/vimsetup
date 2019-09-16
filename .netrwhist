@@ -1,12 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
-let g:netrw_dirhist_0='C:\Users\cmaughan\AppData\Local\nvim\colors'
-let g:netrw_dirhist_9='E:\Dropbox\Dev\cmdr'
-let g:netrw_dirhist_8='D:\Dev'
-let g:netrw_dirhist_7='C:/Users/cmaughan/AppData/Local/nvim'
-let g:netrw_dirhist_6='C:\Users\cmaughan\AppData\Local\nvim'
-let g:netrw_dirhist_5='C:/Users/cmaughan/AppData/Local/nvim/autoload'
-let g:netrw_dirhist_4='C:/Users/cmaughan/AppData/Local/nvim'
-let g:netrw_dirhist_3='C:\Users\cmaughan\AppData\Local\nvim'
-let g:netrw_dirhist_2='C:/Users/cmaughan/AppData/Local'
+let g:netrw_dirhist_cnt =1
 let g:netrw_dirhist_1='C:\Users\cmaughan\AppData\Local\nvim'
