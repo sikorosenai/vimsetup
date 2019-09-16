@@ -4,90 +4,62 @@ set nocompatible
 " GVim required the runtime path to contain the startup script folder
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 let &runtimepath.=','.escape(expand('<sfile>:p:h').'/colors', '\,')
-let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle/Vundle.vim', '\,')
 let &runtimepath.=','.escape(expand('<sfile>:p:h').'/bundle', '\,')
 filetype off
-call vundle#begin()
 
 let loaded_matchit = 1
 let g:python3_host_prog=$MYPYTHON3
 let g:python_host_prog=$MYPYTHON2
 
 " Plugins {{{1
-Plugin 'VundleVim/Vundle.vim'          " Plugin Manager
-Plugin 'tpope/vim-fugitive'            " Git support
-Plugin 'scrooloose/nerdtree'           " Tree browser
-Plugin 'tpope/vim-surround'            " Surround section with ', etc.
-Plugin 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
-Plugin 'bling/vim-airline'             " Fancy status bar
-Plugin 'airblade/vim-gitgutter'        " git info in the gutter, hunk
-Plugin 'easymotion/vim-easymotion'     " easy jumping around - ,,w
-Plugin 'derekwyatt/vim-fswitch'        " Switch between cpp/header. FSHere, FSRight
-Plugin 'mtth/scratch.vim'              " gs scratch window
-Plugin 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
-Plugin 'kien/rainbow_parentheses.vim'  " Color brackets
-Plugin 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
-Plugin 'vim-scripts/mru.vim'           " :MRU
-Plugin 'jlanzarotta/bufexplorer'       " :be
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'szw/vim-maximizer'             " F3 to min/max the current buffer
-Plugin 'junegunn/vim-easy-align'
-Plugin 'RRethy/vim-illuminate'
+call plug#begin('~/.vim/plugged')
+"Plug 'tpope/vim-fugitive'            " Git support
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }    " Tree browser
+"Plug 'tpope/vim-surround'            " Surround section with ', etc.
+"Plug 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
+"Plug 'bling/vim-airline'             " Fancy status bar
+"Plug 'airblade/vim-gitgutter'        " git info in the gutter, hunk
+"Plug 'easymotion/vim-easymotion'     " easy jumping around - ,,w
+"Plug 'derekwyatt/vim-fswitch'        " Switch between cpp/header. FSHere, FSRight
+"Plug 'mtth/scratch.vim'              " gs scratch window
+"Plug 'ctrlpvim/ctrlp.vim'            " Fuzzy tag/file search
+"Plug 'kien/rainbow_parentheses.vim'  " Color brackets
+"Plug 'dahu/VimRegexTutor'            " Regex tutorial; need to do this
+"Plug 'vim-scripts/mru.vim'           " :MRU
+"Plug 'jlanzarotta/bufexplorer'       " :be
+"Plug 'skywind3000/asyncrun.vim'
+"Plug 'szw/vim-maximizer'             " F3 to min/max the current buffer
+"Plug 'junegunn/vim-easy-align'
+"Plug 'RRethy/vim-illuminate'
 
 "Swift
-Plugin 'keith/swift.vim'
+"Plug 'keith/swift.vim'
 
 " Completion
-Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plugin 'deoplete-plugins/deoplete-clang'
+" Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plugin 'deoplete-plugins/deoplete-clang'
+"
+"Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
 
 " Wiki
-Plugin 'vimwiki/vimwiki'
-Plugin 'mattn/calendar-vim'
+"Plug 'vimwiki/vimwiki'
+"Plug 'mattn/calendar-vim'
 
-Plugin 'OrangeT/vim-csharp'
-Plugin 'markonm/traces.vim'
+"Plug 'OrangeT/vim-csharp'
+"Plug 'markonm/traces.vim'
 
-" Use FZF for searching in files using Rg
-Plugin 'junegunn/fzf'                  " Fuzzy finder
-Plugin 'junegunn/fzf.vim'              " Fuzzy finder vim extension
+" UsFZF for searching in files using Rg
+"Plug 'junegunn/fzf'                  " Fuzzy finder
+"Plug 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
 " Session stuff haven't ever used
-Plugin 'tpope/vim-obsession'
+"Plug 'tpope/vim-obsession'
 
 " ?
-Plugin 'kovisoft/slimv'
+"Plug 'kovisoft/slimv'
 
-" Tab for completion
-Plugin 'ervandew/supertab'
+"Plug 'mh21/errormarker.vim'
 
-Plugin 'mh21/errormarker.vim'
-
-"Plugin 'scrooloose/nerdcommenter'      " Comment code sections
-" Haskell
-"Plugin 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-"Plugin 'neovimhaskell/haskell-vim'
-"Plugin 'alx741/vim-hindent'
-
-"Plugin 'tpope/vim-dispatch'
-"Plugin 'bitc/vim-hdevtools'
-"C++
-"Plugin 'JBakamovic/cxxd-vim'
-" Clojure
-"Plugin 'guns/vim-clojure-static'
-"Plugin 'tpope/vim-fireplace'                        " clojure list repl
-"Plugin 'guns/vim-clojure-highlight'                 " Syntax highlight
-
-" Pico 8
-"Plugin 'justinj/vim-pico8-syntax'
-
-" Linux TBD
-"Plugin 'jalcine/cmake.vim'
-"Plugin 'dhruvasagar/vim-prosession'
-
-"Plugin 'w0rp/ale'
-"Plugin 'autozimu/LanguageClient-neovim'
-"Plugin 'parsonsmatt/intero-neovim'
 " Thanks to https://forums.handmadehero.org/index.php/forum?view=topic&catid=4&id=704#3982
 "
 " error message formats
@@ -99,9 +71,116 @@ set errorformat+=\\\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %m
 set errorformat+=\\\ %#%f(%l\\\,%c-%*[0-9]):\ %#%t%[A-z]%#\ %m
 
 let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
-call vundle#end()
 filetype plugin indent on
 filetype plugin on
+
+" FSwitch {{{2
+let g:fsnonewfiles=1
+au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,source'
+au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:/include/src/,reg:|include.*zep|include/src|src|,../../Src/,source'
+
+" Prosession {{{2
+let g:prosession_dir=$MYDROPBOX.'/.vim/session'
+
+" Fuzzy Finder {{{2
+
+" Rainbow Parentheses {{{2
+"try
+"    au VimEnter * RainbowParenthesesToggle
+"    au Syntax * RainbowParenthesesLoadRound
+"    au Syntax * RainbowParenthesesLoadSquare
+"    au Syntax * RainbowParenthesesLoadBraces
+"catch
+"endtry
+
+" Clang Completion {{{2
+let g:clang_library_path=expand("$MYDROPBOX/Dev/bin")
+set noshowmode shortmess+=c
+set noinfercase
+set completeopt-=preview
+set completeopt+=menuone,noinsert,noselect
+" The following line assumes `brew install llvm` in macOS
+let g:clang_user_options = '-std=c++17'
+let g:clang_hl_errors = 1
+let g:clang_complete_auto = 1
+let g:mucomplete#enable_auto_at_startup = 1
+"These broke VC; what were they for?
+"inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+"inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+"inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+
+" NERDTree {{{2
+let NERDTreeHijackNetrw=1
+
+" CtrlP {{{2
+set grepprg=rg\ --color=never
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'Et'
+let g:ctrlp_root_markers = ['Grfx']
+set wildignore+=*/tmp/*,*.swp
+
+nnoremap <Leader>g :silent lgrep<Space>
+
+" RipGrep {{{2
+let g:ackprg = 'rg --vimgrep --no-heading'
+
+" Syntastic {{{2
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"set statusline+=%{fugitive#statusline()}
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+
+" Minibuf Explorer {{{2
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+" VimWiki {{{2
+let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/'},
+            \   {'path': $MYDROPBOX.'/techwiki/'}]
+
+hi VimwikiHeader1 guifg=#FDA01F
+hi VimwikiHeader2 guifg=#22DD11
+hi VimwikiHeader3 guifg=#99BBFF
+hi VimwikiHeader4 guifg=#FF00FF
+hi VimwikiHeader5 guifg=#00FFFF
+hi VimwikiHeader6 guifg=#FFFF00
+hi link VimwikiLink Typedef
+
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+
+:map >> <Plug>VimwikiIncreaseLvlSingleItem
+:map >>> <Plug>VimwikiIncreaseLvlWholeItem
+:map << <Plug>VimwikiDecreaseLvlSingleItem
+:map <<< <Plug>VimwikiDecreaseLvlWholeItem
+
+" VimScratch {{{2
+let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
+
+
+command! MakeTags !ctags -R .
+command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
+command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
+
 
 " Deoplte {{2
 let g:deoplete#enable_at_startup = 1
@@ -165,113 +244,6 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 "augroup vimrc
 "autocmd QuickFixCmdPost * botright copen 8
 "augroup END<cr> 
-
-" FSwitch {{{2
-let g:fsnonewfiles=1
-au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,source'
-au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:/include/src/,reg:|include.*zep|include/src|src|,../../Src/,source'
-
-" Prosession {{{2
-let g:prosession_dir=$MYDROPBOX.'/.vim/session'
-
-" Fuzzy Finder {{{2
-
-" Rainbow Parentheses {{{2
-try
-    au VimEnter * RainbowParenthesesToggle
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
-catch
-endtry
-
-" Clang Completion {{{2
-let g:clang_library_path=expand("$MYDROPBOX/Dev/bin")
-set noshowmode shortmess+=c
-set noinfercase
-set completeopt-=preview
-set completeopt+=menuone,noinsert,noselect
-" The following line assumes `brew install llvm` in macOS
-let g:clang_user_options = '-std=c++17'
-let g:clang_hl_errors = 1
-let g:clang_complete_auto = 1
-let g:mucomplete#enable_auto_at_startup = 1
-"These broke VC; what were they for?
-"inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-"inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-"inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
-
-" NERDTree {{{2
-let NERDTreeHijackNetrw=1
-
-" CtrlP {{{2
-set grepprg=rg\ --color=never
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 1
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'Et'
-let g:ctrlp_root_markers = ['Grfx']
-set wildignore+=*/.git/*,*/tmp/*,*.swp
-
-nnoremap <Leader>g :silent lgrep<Space>
-
-" RipGrep {{{2
-let g:ackprg = 'rg --vimgrep --no-heading'
-
-" Syntastic {{{2
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"set statusline+=%{fugitive#statusline()}
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-
-" Minibuf Explorer {{{2
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-" VimWiki {{{2
-let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/'},
-            \   {'path': $MYDROPBOX.'/techwiki/'}]
-
-hi VimwikiHeader1 guifg=#FDA01F
-hi VimwikiHeader2 guifg=#22DD11
-hi VimwikiHeader3 guifg=#99BBFF
-hi VimwikiHeader4 guifg=#FF00FF
-hi VimwikiHeader5 guifg=#00FFFF
-hi VimwikiHeader6 guifg=#FFFF00
-hi link VimwikiLink Typedef
-
-au BufRead,BufNewFile *.wiki set filetype=vimwiki
-function! ToggleCalendar()
-  execute ":Calendar"
-  if exists("g:calendar_open")
-    if g:calendar_open == 1
-      execute "q"
-      unlet g:calendar_open
-    else
-      g:calendar_open = 1
-    end
-  else
-    let g:calendar_open = 1
-  end
-endfunction
-
-:map >> <Plug>VimwikiIncreaseLvlSingleItem
-:map >>> <Plug>VimwikiIncreaseLvlWholeItem
-:map << <Plug>VimwikiDecreaseLvlSingleItem
-:map <<< <Plug>VimwikiDecreaseLvlWholeItem
-
-" VimScratch {{{2
-let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
-
-
-command! MakeTags !ctags -R .
-command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
-command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
 " Leaders {{{1
 
@@ -375,7 +347,7 @@ set hlsearch
 " Use system clipboard
 :set clipboard=unnamed
 
-set guifont=Consolas:h11:cANSI
+set guifont=Consolas
 
 " Dark goodness
 set background=dark
