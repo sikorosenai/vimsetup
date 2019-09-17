@@ -14,7 +14,7 @@ let g:python_host_prog=$MYPYTHON2
 " Plugins {{{1
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'            " Git support
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }    " Tree browser
+Plug 'scrooloose/nerdtree'           " Tree browser
 Plug 'tpope/vim-surround'            " Surround section with ', etc.
 Plug 'tpope/vim-unimpaired'          " Useful mappings ([<space etc)
 Plug 'bling/vim-airline'             " Fancy status bar
@@ -465,6 +465,8 @@ endfunction
 nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " }}} vim: fdm=marker
-"
+" External Scripts {{{1
 " Load Others
-source coc.vim
+"let path = expand('%:p:h')
+"exec 'source' path . '/coc.vim' 
+runtime coc.vim
