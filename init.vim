@@ -52,10 +52,6 @@ Plug 'markonm/traces.vim'
 Plug 'junegunn/fzf'                  " Fuzzy finder
 Plug 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 
-" Session stuff haven't ever used
-Plug 'tpope/vim-obsession'
-
-" ?
 Plug 'kovisoft/slimv'
 
 Plug 'mh21/errormarker.vim'
@@ -75,16 +71,10 @@ let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
 filetype plugin indent on
 filetype plugin on
 
-
 " FSwitch {{{2
 let g:fsnonewfiles=1
 au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,source'
 au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:/include/src/,reg:|include.*zep|include/src|src|,../../Src/,source'
-
-" Prosession {{{2
-let g:prosession_dir=$MYDROPBOX.'/.vim/session'
-
-" Fuzzy Finder {{{2
 
 " Rainbow Parentheses {{{2
 try
@@ -128,21 +118,16 @@ nnoremap <Leader>g :silent lgrep<Space>
 " RipGrep {{{2
 let g:ackprg = 'rg --vimgrep --no-heading'
 
-" Syntastic {{{2
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"set statusline+=%{fugitive#statusline()}
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
+" Vim Fugitive {{{2
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 " Minibuf Explorer {{{2
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+
 " VimWiki {{{2
 let g:vimwiki_list = [{'path': $MYDROPBOX.'/vimwiki/'},
             \   {'path': $MYDROPBOX.'/techwiki/'}]
@@ -177,12 +162,6 @@ endfunction
 
 " VimScratch {{{2
 let g:scratch_persistence_file=$MYDROPBOX.'/vimscratch.txt'
-
-
-command! MakeTags !ctags -R .
-command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
-command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
-
 
 " Deoplte {{2
 let g:deoplete#enable_at_startup = 1
@@ -226,9 +205,6 @@ augroup haskellStylish
   au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
 augroup END
 
-" ----- w0rp/ale -----
-"let g:ale_linters.haskell = ['hlint']
-
 " ASyncRun {{
 :noremap <F8> :cnext <cr>
 :noremap <S-F8> :cprev <cr>
@@ -251,6 +227,8 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " ** Leader keys Comma is easier to reach
 let mapleader = ","
+
+nnoremap <Leader>gd :Gvdiff<CR>
 
 " Searching
 nnoremap <Leader>, :Find <CR>
@@ -297,9 +275,29 @@ nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
-:noremap <leader>b :AsyncRun cd <root>/build && cmake --build . <cr>
+noremap <leader>b :AsyncRun cd <root>/build && cmake --build . <cr>
 
+" Commands {{{1
 command! MakeTags !ctags -R .
+command! MakeTags !ctags -R .
+command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
+command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
+nnoremap + :Bigger<CR>
+nnoremap - :Smaller<CR>
+
+" Command for git grep
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
+" Auto Commands {{{1
+autocmd FileType c,cpp setlocal equalprg=clang-format
+autocmd GUIEnter * simalt ~x
+
+" Save when focus is lost
+autocmd FocusLost * :wa
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Options {{{1
 set omnifunc=syntaxcomplete#Complete
@@ -349,7 +347,7 @@ set hlsearch
 " Use system clipboard
 :set clipboard=unnamed
 
-set guifont=Consolas
+set guifont=Consolas:h11
 
 " Dark goodness
 set background=dark
@@ -423,30 +421,14 @@ nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 let notabs = 0
 nnoremap <silent> <F6> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
-" Auto Commands {{{1
-autocmd FileType c,cpp setlocal equalprg=clang-format
-autocmd GUIEnter * simalt ~x
-
-" Save when focus is lost
-autocmd FocusLost * :wa
-
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-" Command for git grep
-" - fzf#vim#grep(command, with_column, [options], [fullscreen])
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
+"function! s:check_back_space() abort "{{{
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction"}}}
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ deoplete#manual_complete()
 
 " Functions {{{1
 function! SetGitDir()
