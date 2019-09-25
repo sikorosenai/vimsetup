@@ -31,6 +31,13 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'szw/vim-maximizer'             " F3 to min/max the current buffer
 Plug 'junegunn/vim-easy-align'
 Plug 'RRethy/vim-illuminate'
+Plug 'gruvbox-community/gruvbox'
+" Lisp
+Plug 'kovisoft/paredit', { 'for': 'scheme' }
+Plug 'kovisoft/slimv'
+"let g:slimv_swank_cmd = "!ros -e '(ql:quickload :swank) (swank:create-server)' wait &"
+"let g:slimv_lisp = 'ros run'
+"let g:slimv_impl = 'sbcl'
 
 " Swift
 Plug 'keith/swift.vim'
@@ -257,7 +264,7 @@ nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 nnoremap <leader><space> :noh<cr>
 
 " Replace with last yanked
-nnoremap <leader>s diw"0P
+"nnoremap <leader>s diw"0P
 
 " Replace word under cursor
 nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
@@ -301,8 +308,8 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Options {{{1
 set omnifunc=syntaxcomplete#Complete
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
+"set guioptions-=m  "remove menu bar
+set guioptions+=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set list
@@ -347,12 +354,14 @@ set hlsearch
 " Use system clipboard
 :set clipboard=unnamed
 
-set guifont=Consolas:h11
+set guifont=Consolas:h11:cANSI:qDRAFT
 
 " Dark goodness
 set background=dark
 
-colorscheme molokai
+let g:gruvbox_contrast='hard'
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
 " Mappings {{{1
 " My prefered escape character (j then k)
