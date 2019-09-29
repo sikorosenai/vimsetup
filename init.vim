@@ -34,7 +34,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'gruvbox-community/gruvbox'
 " Lisp
 Plug 'kovisoft/paredit', { 'for': 'scheme' }
-Plug 'kovisoft/slimv'
+" Plug 'kovisoft/slimv'
 "let g:slimv_swank_cmd = "!ros -e '(ql:quickload :swank) (swank:create-server)' wait &"
 "let g:slimv_lisp = 'ros run'
 "let g:slimv_impl = 'sbcl'
