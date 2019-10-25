@@ -80,8 +80,8 @@ filetype plugin on
 
 " FSwitch {{{2
 let g:fsnonewfiles=1
-au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,source'
-au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:/include/src/,reg:|include.*zep|include/src|src|,../../Src/,source'
+au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,../include,source'
+au! BufEnter *.h let b:fswitchdst = 'cpp' | let b:fswitchlocs = 'reg:/include/src/,reg:|include.*zep|include/src|src|,rel:../../src,source'
 
 " Rainbow Parentheses {{{2
 try
@@ -352,7 +352,7 @@ set showmatch
 set hlsearch
 
 " Use system clipboard
-:set clipboard=unnamed
+:set clipboard=unnamedplus
 
 set guifont=Consolas:h11:cANSI:qDRAFT
 
