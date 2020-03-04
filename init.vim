@@ -41,6 +41,11 @@ Plug 'kovisoft/paredit', { 'for': 'scheme' }
 
 " Swift
 Plug 'keith/swift.vim'
+Plug 'sk1418/HowMuch'
+
+" Animated and auto sizing windows
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 
 " Completion
 "Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -269,7 +274,9 @@ nnoremap <leader><space> :noh<cr>
 " Replace word under cursor
 nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
 
-nnoremap <Leader>n :Scratch<cr>
+"nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+"imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+nnoremap <Leader>d i<C-R>=strftime("%F - %A %d %B\n\n")<cr>
 
 nnoremap <Leader>. :CtrlPTag<cr>
 "nnoremap <leader>sw :call SetGitDir()<CR>
