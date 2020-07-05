@@ -42,7 +42,6 @@ Plug 'kovisoft/paredit', { 'for': 'scheme' }
 " Swift
 Plug 'keith/swift.vim'
 Plug 'sk1418/HowMuch'
-Plug 'djoshea/vim-autoread'
 
 " Animated and auto sizing windows
 Plug 'camspiers/animate.vim'
@@ -52,7 +51,7 @@ Plug 'camspiers/lens.vim'
 "Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plugin 'deoplete-plugins/deoplete-clang'
 
-" Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
+Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
 
 " Wiki
 Plug 'vimwiki/vimwiki'
@@ -313,7 +312,7 @@ autocmd GUIEnter * simalt ~x
 " Save when focus is lost
 autocmd FocusLost * :wa
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
+autocmd BufEnter * lcd %:p:h
 " Options {{{1
 set omnifunc=syntaxcomplete#Complete
 "set guioptions-=m  "remove menu bar
@@ -330,7 +329,6 @@ set expandtab
 set encoding=utf-8
 set scrolloff=3
 set autoindent
-set autoread
 set showmode
 set showcmd
 set hidden
@@ -339,6 +337,7 @@ set wildmode=list:longest
 set foldmethod=marker
 set equalalways
 set termguicolors
+
 "vimwiki
 set nocompatible
 syntax on
@@ -360,15 +359,14 @@ set showmatch
 set hlsearch
 
 " Use system clipboard
-:set clipboard=unnamed
+:set clipboard=unnamedplus
 
-set guifont=Consolas:h11:cANSI:qDRAFT
+set guifont=h11:cANSI:qDRAFT
 
 " Dark goodness
 set background=dark
 
-let g:gruvbox_contrast='hard'
-let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='gruvbox_contrast_dark'
 colorscheme gruvbox
 
 " Mappings {{{1
@@ -381,12 +379,6 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gk k
 nnoremap gj j
-
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 
 "" Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -412,6 +404,7 @@ map <C-k><C-W> :FSLeft<CR>
 
 " File tree, Tagbar tree
 map <C-t> :NERDTreeToggle<CR>
+" map <C-i> :NERDTreeToggle %<CR>
 "map <C-T> :TagbarToggle<CR>
 "map <C-p> :CtrlPMixed<CR>
 ",nnoremap <C-i> :CtrlPTag<CR>
@@ -472,6 +465,4 @@ nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 " }}} vim: fdm=marker
 " External Scripts {{{1
 " Load Others
-"let path = expand('%:p:h')
-"exec 'source' path . '/coc.vim' 
-" runtime coc.vim
+runtime coc.vim
