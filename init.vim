@@ -34,10 +34,8 @@ Plug 'RRethy/vim-illuminate'
 Plug 'gruvbox-community/gruvbox'
 " Lisp
 Plug 'kovisoft/paredit', { 'for': 'scheme' }
-" Plug 'kovisoft/slimv'
-"let g:slimv_swank_cmd = "!ros -e '(ql:quickload :swank) (swank:create-server)' wait &"
-"let g:slimv_lisp = 'ros run'
-"let g:slimv_impl = 'sbcl'
+Plug 'yegappan/taglist'
+Plug 'majutsushi/tagbar'
 
 " Swift
 Plug 'keith/swift.vim'
@@ -46,10 +44,6 @@ Plug 'sk1418/HowMuch'
 " Animated and auto sizing windows
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
-
-" Completion
-"Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plugin 'deoplete-plugins/deoplete-clang'
 
 Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
 
@@ -235,10 +229,6 @@ let g:asyncrun_bell = 1
 " F10 to toggle quickfix window
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
-"augroup vimrc
-"autocmd QuickFixCmdPost * botright copen 8
-"augroup END<cr> 
-
 " Leaders {{{1
 
 " ** Leader keys Comma is easier to reach
@@ -252,9 +242,6 @@ nnoremap <Leader>. :CtrlPTag<cr>
 
 " Remove all white space trailing
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-"nnoremap <leader>B <C-w>\|
-"nnoremap <leader>S <C-w>=
 
 " Tag list and tag jump
 nnoremap <Leader>gt g<C-]>
@@ -270,7 +257,7 @@ nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 "nnoremap <leader>ws <c-w>v<c-w>l
 
 " Remove highlight selection
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><space> :noh<cr> :MarkClear<cr>
 
 " Replace with last yanked
 "nnoremap <leader>s diw"0P
@@ -278,8 +265,7 @@ nnoremap <leader><space> :noh<cr>
 " Replace word under cursor
 nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
 
-"nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
-"imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+" Insert date
 nnoremap <Leader>d i<C-R>=strftime("%F - %A %d %B\n\n")<cr>
 
 nnoremap <Leader>. :CtrlPTag<cr>
@@ -293,6 +279,7 @@ nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
+" Run a git friendly cmake build
 noremap <leader>b :AsyncRun cd <root>/build && cmake --build . <cr>
 
 " Commands {{{1
