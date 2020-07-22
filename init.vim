@@ -67,6 +67,10 @@ Plug 'junegunn/fzf.vim'              " Fuzzy finder vim extension
 Plug 'kovisoft/slimv'
 
 Plug 'mh21/errormarker.vim'
+
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-mark'
+
 call plug#end()
 
 " Thanks to https://forums.handmadehero.org/index.php/forum?view=topic&catid=4&id=704#3982
