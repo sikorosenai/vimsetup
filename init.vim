@@ -47,6 +47,10 @@ Plug 'camspiers/lens.vim'
 
 Plug 'neoclide/coc.nvim', { 'branch' : 'release'}
 
+" Janet
+Plug 'Olical/conjure'
+Plug 'bakpakin/janet.vim'
+
 " Wiki
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
@@ -233,6 +237,7 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " ** Leader keys Comma is easier to reach
 let mapleader = ","
+let maplocalleader = ","
 
 nnoremap <Leader>gd :Gvdiff<CR>
 
@@ -350,7 +355,7 @@ set showmatch
 set hlsearch
 
 " Use system clipboard
-:set clipboard=unnamedplus
+:set clipboard=unnamed
 
 set guifont=h11:cANSI:qDRAFT
 
