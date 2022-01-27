@@ -11,7 +11,6 @@ let loaded_matchit = 1
 let g:python3_host_prog=$MYPYTHON3
 let g:python_host_prog=$MYPYTHON2
 
-" Plugins {{{1
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'            " Git support
 Plug 'scrooloose/nerdtree'           " Tree browser
@@ -69,6 +68,10 @@ Plug 'mh21/errormarker.vim'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-mark'
 
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'frazrepo/vim-rainbow'
+
 call plug#end()
 
 " Thanks to https://forums.handmadehero.org/index.php/forum?view=topic&catid=4&id=704#3982
@@ -85,6 +88,9 @@ let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
 filetype plugin indent on
 filetype plugin on
 
+" Vim Rainbow
+let g:rainbow_active = 1
+
 " FSwitch {{{2
 let g:fsnonewfiles=1
 au! BufEnter *.cpp let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = 'reg:/src/include,reg:|src|include/zep|,../Inc/**/,../include,source'
@@ -99,16 +105,6 @@ try
 catch
 endtry
 
-" Clang Completion {{{2
-let g:clang_library_path=expand("$MYDROPBOX/Dev/bin")
-set noshowmode shortmess+=c
-set noinfercase
-set completeopt-=preview
-set completeopt+=menuone,noinsert,noselect
-" The following line assumes `brew install llvm` in macOS
-let g:clang_user_options = '-std=c++17'
-let g:clang_hl_errors = 1
-let g:clang_complete_auto = 1
 let g:mucomplete#enable_auto_at_startup = 1
 "These broke VC; what were they for?
 "inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
@@ -357,12 +353,12 @@ set hlsearch
 " Use system clipboard
 :set clipboard=unnamed
 
-set guifont=h11:cANSI:qDRAFT
+"set guifont=h11:cANSI:qDRAFT
 
 " Dark goodness
 set background=dark
 
-let g:gruvbox_contrast_dark='gruvbox_contrast_dark'
+"let g:gruvbox_contrast_dark='gruvbox_contrast_dark'
 colorscheme gruvbox
 
 " Mappings {{{1
