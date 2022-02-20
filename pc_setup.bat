@@ -3,10 +3,10 @@ cmd /c git config --global alias.lol "log --graph --pretty=format:'%Cred%h%Crese
 cmd /c git config --global user.email "mornymorny@gmail.com"
 cmd /c git config --global user.name "Morny"
 
-setx MYDROPBOX=c:\Dropbox
-set nvim=so ~/AppData/Local/nvim/init.vim
-echo %nvim% > %USERPROFILE%/.vimrc
-cargo install ripgrep
+REM setx MYDROPBOX=c:\Dropbox
+REM set nvim=so ~/AppData/Local/nvim/init.vim
+REM echo %nvim% > %USERPROFILE%/.vimrc
+REM cargo install ripgrep
 
 REM Setup P4 review, might need to change both reg vars!!
 REM \HKEY_CLASSES_ROOT\P4Review\shell\Review\command and \Open\command - check these have been set!
